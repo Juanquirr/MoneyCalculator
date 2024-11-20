@@ -1,6 +1,8 @@
 package software.ulpgc.moneycalculator.io;
 
-import java.util.Currency;
+import software.ulpgc.moneycalculator.control.Command;
+import software.ulpgc.moneycalculator.model.*;
+
 import java.util.List;
 
 public class MockMain {

@@ -1,3 +1,5 @@
+package software.ulpgc.moneycalculator.model;
+
 import software.ulpgc.moneycalculator.control.Command;
 
 public class ExchangeMoneyCommand implements Command {

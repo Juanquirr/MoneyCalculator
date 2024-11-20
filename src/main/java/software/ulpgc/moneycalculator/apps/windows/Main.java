@@ -1,7 +1,7 @@
 package software.ulpgc.moneycalculator.apps.windows;
 
-import software.ulpgc.moneycalculator.Currency;
-import software.ulpgc.moneycalculator.CurrencyLoader;
+import software.ulpgc.moneycalculator.model.Currency;
+import software.ulpgc.moneycalculator.model.CurrencyLoader;
 
 import java.util.List;
 

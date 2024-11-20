@@ -1,5 +1,5 @@
 package software.ulpgc.moneycalculator.apps.windows;
 
 public class FixerAPI {
-    public static final String key = "31547d8fcf138f06d26b4f66076050d1";
+    public static final String key = "8938455d0353e48d30dd6541063dcb9b";
 }
