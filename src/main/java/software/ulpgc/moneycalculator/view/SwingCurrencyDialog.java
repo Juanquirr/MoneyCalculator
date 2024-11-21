@@ -4,6 +4,7 @@ import software.ulpgc.moneycalculator.model.Currency;
 import software.ulpgc.moneycalculator.model.CurrencyDialog;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.List;
 
@@ -12,6 +13,8 @@ public class SwingCurrencyDialog extends JPanel implements CurrencyDialog {
     private JComboBox<Currency> currencySelector;
 
     public SwingCurrencyDialog() {
+        setLayout(new FlowLayout());
+        setBorder(new LineBorder(Color.magenta));
     }
 
     @Override

@@ -6,6 +6,7 @@ import software.ulpgc.moneycalculator.control.Command;
 import software.ulpgc.moneycalculator.model.*;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
@@ -33,18 +34,18 @@ public class SwingMain extends JFrame {
         this.setTitle("Money calculator");
         this.setSize(800,600);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
         this.add(createNorthPanel(), BorderLayout.NORTH);
-        this.add(createMoneyDialog());
-        this.add(createCurrencyDialog(), BorderLayout.CENTER);
-        this.add(createMoneyDisplay(), BorderLayout.EAST);
+        this.add(createCenterPanel(), BorderLayout.CENTER);
         this.add(toolbar(), BorderLayout.SOUTH);
     }
 
     private Component createNorthPanel() {
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
+        northPanel.setBorder(new LineBorder(Color.RED, 2)); // RECUERDA BORRAR
 
         JLabel title = createTitle();
         JLabel name = createAuthorName();
@@ -56,19 +57,35 @@ public class SwingMain extends JFrame {
         return northPanel;
     }
 
+    private Component createCenterPanel() {
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        centerPanel.setBorder(new LineBorder(Color.blue, 2)); // RECUERDA BORRAR
+
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+        centerPanel.add(createMoneyDialog());
+        centerPanel.add(createCurrencyDialog());
+        centerPanel.add(createMoneyDisplay());
+
+        return centerPanel;
+    }
+
+
     private Component createMoneyDialog() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         SwingMoneyDialog dialog = new SwingMoneyDialog();
         this.moneyDialog = dialog;
-        panel.add(dialog);
-        return panel;
+        return dialog;
     }
 
     private Component createCurrencyDialog() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
         SwingCurrencyDialog dialog = new SwingCurrencyDialog();
         this.currencyDialog = dialog;
-        return dialog;
+
+        panel.add(dialog);
+        return panel;
     }
 
     private Component createMoneyDisplay() {
@@ -78,9 +95,15 @@ public class SwingMain extends JFrame {
     }
 
     private Component toolbar() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.setBorder(new LineBorder(Color.RED, 2)); // RECUERDA BORRAR
+
         JButton button = new JButton("calculate");
         button.addActionListener(e -> commands.get("exchange money").execute());
-        return button;
+
+        panel.add(button);
+        return panel;
     }
 
     private void add(String name, Command command) {
@@ -111,7 +134,7 @@ public class SwingMain extends JFrame {
         JLabel name = new JLabel("Juan Carlos Rodríguez Ramírez");
         name.setAlignmentX(Component.CENTER_ALIGNMENT);
         name.setFont(new Font("Arial", Font.BOLD, 12));
-        name.setForeground(new Color(11, 90, 234));
+        name.setForeground(new Color(70, 120, 201));
         return name;
     }
 }
