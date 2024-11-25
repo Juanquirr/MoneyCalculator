@@ -12,8 +12,8 @@ import java.util.List;
 
 public class SwingMoneyDialog extends JPanel implements MoneyDialog {
     private JTextField amountField;
-    private CurrencyDialog currencyDialog;
 
+    private CurrencyDialog currencyDialog;
     public SwingMoneyDialog() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(new LineBorder(Color.black));
@@ -22,7 +22,6 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
     @Override
     public MoneyDialog define(List<Currency> currencies) {
         add(createLabelAndAmountField());
-//        add(Box.createRigidArea(new Dimension(0, 50)));
         add(createCurrencyDialog(currencies));
         return this;
     }
@@ -30,9 +29,9 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
     private Component createLabelAndAmountField() {
         JPanel panel = new JPanel(new FlowLayout());
         panel.setBorder(new LineBorder(Color.RED, 2)); // RECUERDA BORRAR
-        panel.setMaximumSize(new Dimension(300, 50));
+        panel.setMaximumSize(new Dimension(300, 70));
         JLabel label = new JLabel("Introduce an amount: ");
-        label.setFont(new Font("Arial", Font.BOLD, 12));
+        label.setFont(new Font("Arial", Font.BOLD, 15));
         label.setForeground(new Color(10, 200, 100));
 
         JTextField textField = new JTextField("0");
@@ -44,9 +43,8 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
         return panel;
     }
 
-
     private Component createCurrencyDialog(List<Currency> currencies) {
-        SwingCurrencyDialog dialog = new SwingCurrencyDialog();
+        SwingCurrencyDialog dialog = new SwingCurrencyDialog("From: ");
         dialog.define(currencies);
         this.currencyDialog = dialog;
         return dialog;
@@ -59,5 +57,13 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
 
     private long toLong(String text) {
         return Long.parseLong(text);
+    }
+
+    public JTextField getAmountField() {
+        return amountField;
+    }
+
+    public CurrencyDialog getCurrencyDialog() {
+        return currencyDialog;
     }
 }

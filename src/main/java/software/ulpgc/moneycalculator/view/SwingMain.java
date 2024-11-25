@@ -8,6 +8,8 @@ import software.ulpgc.moneycalculator.model.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,27 +67,31 @@ public class SwingMain extends JFrame {
         centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
         centerPanel.add(createMoneyDialog());
         centerPanel.add(createCurrencyDialog());
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
         centerPanel.add(createMoneyDisplay());
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
 
         return centerPanel;
     }
 
-
     private Component createMoneyDialog() {
         SwingMoneyDialog dialog = new SwingMoneyDialog();
         this.moneyDialog = dialog;
+//        dialog.getAmountField().addKeyListener(new KeyAdapter() {
+//            @Override
+//            public void keyTyped(KeyEvent e) {
+//                super.keyTyped(e);
+//                SwingUtilities.invokeLater(() -> commands.get("Calculate"));
+//            }
+//        });
         return dialog;
     }
 
     private Component createCurrencyDialog() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        SwingCurrencyDialog dialog = new SwingCurrencyDialog();
+        SwingCurrencyDialog dialog = new SwingCurrencyDialog("To: ");
         this.currencyDialog = dialog;
-
-        panel.add(dialog);
-        return panel;
+        return dialog;
     }
 
     private Component createMoneyDisplay() {
@@ -96,10 +102,10 @@ public class SwingMain extends JFrame {
 
     private Component toolbar() {
         JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.setLayout(new FlowLayout());
         panel.setBorder(new LineBorder(Color.RED, 2)); // RECUERDA BORRAR
 
-        JButton button = new JButton("calculate");
+        JButton button = new JButton("Calculate");
         button.addActionListener(e -> commands.get("exchange money").execute());
 
         panel.add(button);
