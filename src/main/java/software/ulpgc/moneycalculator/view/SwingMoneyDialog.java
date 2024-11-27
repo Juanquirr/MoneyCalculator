@@ -12,39 +12,32 @@ import java.util.List;
 
 public class SwingMoneyDialog extends JPanel implements MoneyDialog {
     private JTextField amountField;
-
     private CurrencyDialog currencyDialog;
+
     public SwingMoneyDialog() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBorder(new LineBorder(Color.black));
+        this.setBorder(new LineBorder(Color.pink, 3));
+        this.setBackground(new Color(121,4, 235));
     }
 
     @Override
     public MoneyDialog define(List<Currency> currencies) {
-        add(createLabelAndAmountField());
         add(createCurrencyDialog(currencies));
+        add(Box.createVerticalStrut(50));
+        add(moneyDialogTextField());
         return this;
     }
 
-    private Component createLabelAndAmountField() {
-        JPanel panel = new JPanel(new FlowLayout());
-        panel.setBorder(new LineBorder(Color.RED, 2)); // RECUERDA BORRAR
-        panel.setMaximumSize(new Dimension(300, 70));
-        JLabel label = new JLabel("Introduce an amount: ");
-        label.setFont(new Font("Arial", Font.BOLD, 15));
-        label.setForeground(new Color(10, 200, 100));
-
+    private JTextField moneyDialogTextField() {
         JTextField textField = new JTextField("0");
         textField.setPreferredSize(new Dimension(100, 25));
         this.amountField = textField;
-
-        panel.add(label);
-        panel.add(textField);
-        return panel;
+        return textField;
     }
 
     private Component createCurrencyDialog(List<Currency> currencies) {
-        SwingCurrencyDialog dialog = new SwingCurrencyDialog("From: ");
+        //this.currencyDialog = new SwingCurrencyDialog().define(currencies);
+        SwingCurrencyDialog dialog = new SwingCurrencyDialog();
         dialog.define(currencies);
         this.currencyDialog = dialog;
         return dialog;
