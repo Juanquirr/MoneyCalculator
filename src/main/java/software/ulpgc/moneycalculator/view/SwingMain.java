@@ -1,5 +1,6 @@
 package software.ulpgc.moneycalculator.view;
 
+import software.ulpgc.moneycalculator.apps.windows.CustomizedComponent;
 import software.ulpgc.moneycalculator.apps.windows.FixerCurrencyLoader;
 import software.ulpgc.moneycalculator.control.ExchangeMoneyCommand;
 import software.ulpgc.moneycalculator.io.MockExchangeRateLoader;
@@ -51,13 +52,16 @@ public class SwingMain extends JFrame {
         northPanel.setOpaque(false);
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBorder(new LineBorder(Color.RED, 2)); // RECUERDA BORRAR
+        northPanel.setPreferredSize(new Dimension(Integer.MAX_VALUE,200));
 
-        JLabel title = createTitle();
-        JLabel name = createAuthorName();
+        JLabel title = new CustomizedComponent().createTitle();
+        JLabel name = new CustomizedComponent().createAuthorName();
 
+        northPanel.add(Box.createVerticalGlue());
         northPanel.add(title);
-        northPanel.add(Box.createVerticalStrut(10));
+        northPanel.add(Box.createVerticalGlue());
         northPanel.add(name);
+        northPanel.add(Box.createVerticalGlue());
 
         return northPanel;
     }
@@ -68,15 +72,9 @@ public class SwingMain extends JFrame {
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         centerPanel.setBorder(new LineBorder(Color.blue, 2)); // RECUERDA BORRAR
 
-//        centerPanel.add(Box.createVerticalStrut(200));
         centerPanel.add((Component) (this.moneyDialogLeft = createMoneyDialog()));
         centerPanel.add((Component) (this.moneyDialogRight = createMoneyDialog()));
-//        centerPanel.add(Box.createVerticalStrut(50));
 //        centerPanel.add(createMoneyDisplay());
-//        centerPanel.add(Box.createVerticalStrut(50));
-
-        // REFACTORIZA
-
         return centerPanel;
     }
 
@@ -125,23 +123,6 @@ public class SwingMain extends JFrame {
 
     private CurrencyDialog currencyDialog() {
         return currencyDialog;
-    }
-
-
-    private static JLabel createTitle() {
-        JLabel title = new JLabel("MONEY CALCULATOR");
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Arial", Font.BOLD, 40));
-        title.setForeground(new Color(202, 60, 1));
-        return title;
-    }
-
-    private static JLabel createAuthorName() {
-        JLabel name = new JLabel("Juan Carlos Rodríguez Ramírez");
-        name.setAlignmentX(Component.CENTER_ALIGNMENT);
-        name.setFont(new Font("Arial", Font.BOLD, 12));
-        name.setForeground(new Color(70, 120, 201));
-        return name;
     }
 
     public MoneyDialog getMoneyDialogLeft() {

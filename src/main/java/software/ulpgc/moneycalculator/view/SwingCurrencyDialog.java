@@ -1,5 +1,6 @@
 package software.ulpgc.moneycalculator.view;
 
+import software.ulpgc.moneycalculator.apps.windows.CustomizedComponent;
 import software.ulpgc.moneycalculator.model.Currency;
 import software.ulpgc.moneycalculator.model.CurrencyDialog;
 
@@ -24,14 +25,12 @@ public class SwingCurrencyDialog extends JPanel implements CurrencyDialog {
     }
 
     private Component createCurrencySelector(List<Currency> currencies) {
-        JComboBox<Currency> selector = new JComboBox<>();
-        for (Currency currency : currencies) selector.addItem(currency);
-        selector.setBackground(new Color(102, 150, 200));
-        selector.setBorder(new LineBorder(Color.black, 3));
-        selector.setFont(new Font("Monospaced", Font.PLAIN, 10));
-        this.currencySelector = selector;
-        return selector;
+        this.currencySelector = new CustomizedComponent().customizeComboBox(new JComboBox<>());
+        for (Currency currency : currencies) currencySelector.addItem(currency);
+        return currencySelector;
     }
+
+
 
     @Override
     public Currency get() {

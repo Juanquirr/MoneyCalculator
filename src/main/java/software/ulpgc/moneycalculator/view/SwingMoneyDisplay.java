@@ -9,9 +9,7 @@ import java.awt.*;
 public class SwingMoneyDisplay extends JLabel implements MoneyDisplay {
 
     public SwingMoneyDisplay() {
-        this.setText("PEPITO 123");
-        this.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.setFont(new Font("Arial", Font.BOLD, 20));
+
     }
 
     @Override
