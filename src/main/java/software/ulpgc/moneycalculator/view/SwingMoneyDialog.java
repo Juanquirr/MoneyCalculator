@@ -2,9 +2,9 @@ package software.ulpgc.moneycalculator.view;
 
 import software.ulpgc.moneycalculator.apps.windows.CustomizedComponent;
 import software.ulpgc.moneycalculator.model.Currency;
-import software.ulpgc.moneycalculator.model.CurrencyDialog;
+import software.ulpgc.moneycalculator.io.CurrencyDialog;
 import software.ulpgc.moneycalculator.model.Money;
-import software.ulpgc.moneycalculator.model.MoneyDialog;
+import software.ulpgc.moneycalculator.io.MoneyDialog;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -19,6 +19,7 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
     public SwingMoneyDialog() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(new LineBorder(Color.pink, 3));
+        this.setBackground(new Color(90, 121, 200));
     }
 
     @Override
@@ -35,6 +36,8 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         panel.setBorder(new LineBorder(Color.blue, 3));
+        panel.setBackground(new Color(90, 121, 200));
+        panel.setPreferredSize(new Dimension(280, 40));
         panel.setBackground(Color.white);
         panel.add(this.amountField = new CustomizedComponent().customizeTextField(new SwingAmountEntry()));
         return panel;
@@ -47,7 +50,8 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
 
     private JPanel createCurrencyToolbar() {
         JPanel toolbar = new JPanel();
-        toolbar.setLayout(new FlowLayout(FlowLayout.LEFT));
+        toolbar.setLayout(new FlowLayout(FlowLayout.CENTER));
+        toolbar.setOpaque(false);
         currencyButtons(toolbar);
         return toolbar;
     }

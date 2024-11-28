@@ -1,4 +1,6 @@
-package software.ulpgc.moneycalculator.model;
+package software.ulpgc.moneycalculator.io;
+
+import software.ulpgc.moneycalculator.model.Currency;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TsvFileCurrencyLoader implements CurrencyLoader{
+public class TsvFileCurrencyLoader implements CurrencyLoader {
     private final File file;
 
     public TsvFileCurrencyLoader(File file) {

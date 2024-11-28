@@ -2,7 +2,7 @@ package software.ulpgc.moneycalculator.view;
 
 import software.ulpgc.moneycalculator.apps.windows.CustomizedComponent;
 import software.ulpgc.moneycalculator.model.Currency;
-import software.ulpgc.moneycalculator.model.CurrencyDialog;
+import software.ulpgc.moneycalculator.io.CurrencyDialog;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -16,6 +16,7 @@ public class SwingCurrencyDialog extends JPanel implements CurrencyDialog {
     public SwingCurrencyDialog() {
         setLayout(new FlowLayout());
         setBorder(new LineBorder(Color.magenta));
+        setOpaque(false);
     }
 
     @Override

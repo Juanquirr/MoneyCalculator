@@ -20,10 +20,8 @@ public class CustomizedComponent {
     }
     public JTextField customizeTextField(JTextField textField) {
         textField.setHorizontalAlignment(JTextField.CENTER);
-        textField.setColumns(15);
         textField.setBorder(null);
-        textField.setFont(customFont);
-        textField.setPreferredSize(new Dimension(100, 25));
+        textField.setFont(getCustomFont().deriveFont(15f));
         return textField;
     }
     public JButton customizeButton(JButton button) {
@@ -37,13 +35,14 @@ public class CustomizedComponent {
     public JComboBox<Currency> customizeComboBox(JComboBox<Currency> selector) {
         selector.setBackground(new Color(102, 150, 200));
         selector.setBorder(new LineBorder(Color.orange, 3));
-        selector.setFont(getCustomFont().deriveFont(8f));
+        selector.setFont(getCustomFont().deriveFont(13f));
+        selector.setMaximumRowCount(4);
         return selector;
     }
     public JLabel createTitle() {
         JLabel title = new JLabel("MONEY CALCULATOR");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(getCustomFont().deriveFont(50f));
+        title.setFont(getCustomFont().deriveFont(45f));
         title.setForeground(new Color(202, 60, 1));
         return title;
     }

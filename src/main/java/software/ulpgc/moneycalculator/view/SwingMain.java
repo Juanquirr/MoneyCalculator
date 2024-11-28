@@ -3,8 +3,9 @@ package software.ulpgc.moneycalculator.view;
 import software.ulpgc.moneycalculator.apps.windows.CustomizedComponent;
 import software.ulpgc.moneycalculator.apps.windows.FixerCurrencyLoader;
 import software.ulpgc.moneycalculator.control.ExchangeMoneyCommand;
-import software.ulpgc.moneycalculator.io.MockExchangeRateLoader;
+import software.ulpgc.moneycalculator.apps.mock.MockExchangeRateLoader;
 import software.ulpgc.moneycalculator.control.Command;
+import software.ulpgc.moneycalculator.io.MoneyDialog;
 import software.ulpgc.moneycalculator.model.*;
 
 import javax.swing.*;
@@ -33,14 +34,13 @@ public class SwingMain extends JFrame {
 
     public SwingMain() throws HeadlessException {
         this.setTitle("Money calculator");
-        this.setSize(800,600);
+        this.setSize(1000,500);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
-        this.getContentPane().setBackground(new Color(71,75,78));
+        this.getContentPane().setBackground(new Color(60,51,154));
         this.add(createNorthPanel(), BorderLayout.NORTH);
-        this.add(Box.createVerticalStrut(100));
         this.add(createCenterPanel(), BorderLayout.CENTER);
         this.add(toolbar(), BorderLayout.SOUTH);
     }
@@ -50,7 +50,7 @@ public class SwingMain extends JFrame {
         northPanel.setOpaque(false);
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBorder(new LineBorder(Color.RED, 2)); // RECUERDA BORRAR
-        northPanel.setPreferredSize(new Dimension(Integer.MAX_VALUE,200));
+        northPanel.setPreferredSize(new Dimension(Integer.MAX_VALUE,150));
 
         JLabel title = new CustomizedComponent().createTitle();
         JLabel name = new CustomizedComponent().createAuthorName();
@@ -66,9 +66,9 @@ public class SwingMain extends JFrame {
 
     private JPanel createCenterPanel() {
         JPanel centerPanel = new JPanel();
-        centerPanel.setOpaque(false);
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         centerPanel.setBorder(new LineBorder(Color.blue, 2)); // RECUERDA BORRAR
+        centerPanel.setOpaque(false);
 
         this.moneyDialogLeft = (SwingMoneyDialog) createMoneyDialog().define(new FixerCurrencyLoader().load());
         this.moneyDialogRight = (SwingMoneyDialog) createMoneyDialog().define(new FixerCurrencyLoader().load());

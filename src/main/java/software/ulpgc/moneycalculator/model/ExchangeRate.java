@@ -7,7 +7,7 @@ public record ExchangeRate(Currency from, Currency to, LocalDate date, double ra
 
     @Override
     public String toString() {
-        return "software.ulpgc.moneycalculator.model.ExchangeRate[" +
+        return "ExchangeRate[" +
                 "from=" + from + ", " +
                 "to=" + to + ", " +
                 "date=" + date + ", " +

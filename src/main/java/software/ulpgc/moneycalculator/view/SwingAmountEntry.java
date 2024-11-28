@@ -11,7 +11,10 @@ public class SwingAmountEntry extends JTextField {
 
     public SwingAmountEntry() {
         super(PLACEHOLDER);
-        ((AbstractDocument) getDocument()).setDocumentFilter(new NumericFilter());
+
+        NumericFilter numericFilter = new NumericFilter();
+        numericFilter.setPlaceholder(PLACEHOLDER);
+        ((AbstractDocument) getDocument()).setDocumentFilter(numericFilter);
 
         addFocusListener(new FocusAdapter() {
             @Override

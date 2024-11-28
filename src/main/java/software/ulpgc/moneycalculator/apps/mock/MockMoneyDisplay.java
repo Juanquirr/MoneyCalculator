@@ -1,7 +1,7 @@
-package software.ulpgc.moneycalculator.io;
+package software.ulpgc.moneycalculator.apps.mock;
 
 import software.ulpgc.moneycalculator.model.Money;
-import software.ulpgc.moneycalculator.model.MoneyDisplay;
+import software.ulpgc.moneycalculator.view.MoneyDisplay;
 
 public class MockMoneyDisplay implements MoneyDisplay {
     @Override

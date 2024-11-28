@@ -1,8 +1,8 @@
-package software.ulpgc.moneycalculator.io;
+package software.ulpgc.moneycalculator.apps.mock;
 
 import software.ulpgc.moneycalculator.model.Currency;
 import software.ulpgc.moneycalculator.model.Money;
-import software.ulpgc.moneycalculator.model.MoneyDialog;
+import software.ulpgc.moneycalculator.io.MoneyDialog;
 
 import java.util.List;
 

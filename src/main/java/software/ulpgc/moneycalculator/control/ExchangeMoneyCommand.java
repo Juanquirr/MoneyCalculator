@@ -1,6 +1,9 @@
 package software.ulpgc.moneycalculator.control;
 
+import software.ulpgc.moneycalculator.io.ExchangeRateLoader;
+import software.ulpgc.moneycalculator.io.MoneyDialog;
 import software.ulpgc.moneycalculator.model.*;
+import software.ulpgc.moneycalculator.view.MoneyDisplay;
 
 public class    ExchangeMoneyCommand implements Command {
     private final MoneyDialog fromMoneyDialog;

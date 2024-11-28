@@ -1,8 +1,11 @@
-package software.ulpgc.moneycalculator.io;
+package software.ulpgc.moneycalculator.apps.mock;
 
 import software.ulpgc.moneycalculator.control.Command;
 import software.ulpgc.moneycalculator.control.ExchangeMoneyCommand;
+import software.ulpgc.moneycalculator.io.ExchangeRateLoader;
+import software.ulpgc.moneycalculator.io.MoneyDialog;
 import software.ulpgc.moneycalculator.model.*;
+import software.ulpgc.moneycalculator.view.MoneyDisplay;
 
 import java.util.List;
 
