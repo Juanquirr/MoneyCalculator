@@ -19,13 +19,16 @@ public class CustomizedComponent {
         }
     }
     public JTextField customizeTextField(JTextField textField) {
+        textField.setHorizontalAlignment(JTextField.CENTER);
+        textField.setColumns(15);
+        textField.setBorder(null);
         textField.setFont(customFont);
         textField.setPreferredSize(new Dimension(100, 25));
         return textField;
     }
     public JButton customizeButton(JButton button) {
         button.setFont(getCustomFont().deriveFont(12f));
-        button.setForeground(Color.pink);
+        button.setForeground(Color.black);
         button.setBackground(new Color(102, 150, 200));
         button.setPreferredSize(new Dimension(100, 35));
         return button;
@@ -34,7 +37,7 @@ public class CustomizedComponent {
     public JComboBox<Currency> customizeComboBox(JComboBox<Currency> selector) {
         selector.setBackground(new Color(102, 150, 200));
         selector.setBorder(new LineBorder(Color.orange, 3));
-        selector.setFont(customFont);
+        selector.setFont(getCustomFont().deriveFont(8f));
         return selector;
     }
     public JLabel createTitle() {

@@ -5,7 +5,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import software.ulpgc.moneycalculator.model.Currency;
 import software.ulpgc.moneycalculator.model.CurrencyLoader;
+import software.ulpgc.moneycalculator.model.TsvFileCurrencyLoader;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -24,13 +26,9 @@ public class FixerCurrencyLoader implements CurrencyLoader {
 //            return emptyList();
 //        }
 
-        return List.of(
-                new Currency("EUR", "Euro", "€"),
-                new Currency("USD", "Dolar", "$"),
-                new Currency("GBP", "Libra", "£")
-        );
+        return new TsvFileCurrencyLoader(new File("currencies.tsv")).load();
     }
-//
+
 //    private List<Currency> toList(String json) {
 //        List<Currency> list = new ArrayList<>();
 //        Map<String, JsonElement> symbols = new Gson().fromJson(json, JsonObject.class).get("symbols").getAsJsonObject().asMap();

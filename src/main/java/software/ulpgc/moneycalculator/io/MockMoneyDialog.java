@@ -18,6 +18,6 @@ public class MockMoneyDialog implements MoneyDialog {
 
     @Override
     public Money get() {
-        return new Money(200, currencies.get(0));
+        return new Money(1, currencies.get(4));
     }
 }

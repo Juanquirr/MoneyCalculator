@@ -44,8 +44,8 @@ public class TsvFileCurrencyLoader implements CurrencyLoader{
     private Currency toCurrency(String[] fields) {
         return new Currency(
                 fields[0],
-                fields[1],
-                fields.length == 2 ? "" : fields[2]
+                fields[1]
+//                fields.length == 2 ? "" : fields[2]
         );
     }
 }

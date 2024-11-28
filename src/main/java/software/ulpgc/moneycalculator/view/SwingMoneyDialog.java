@@ -11,6 +11,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.List;
 
+
 public class SwingMoneyDialog extends JPanel implements MoneyDialog {
     private JTextField amountField;
     private CurrencyDialog currencyDialog;
@@ -18,12 +19,6 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
     public SwingMoneyDialog() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(new LineBorder(Color.pink, 3));
-        //this.setBackground(new Color(121,4, 235));
-    }
-
-    private JTextField moneyDialogTextField() {
-        this.amountField = new CustomizedComponent().customizeTextField(new JTextField("0"));
-        return amountField;
     }
 
     @Override
@@ -36,12 +31,21 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
         return this;
     }
 
+    private JPanel moneyDialogTextField() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        panel.setBorder(new LineBorder(Color.blue, 3));
+        panel.setBackground(Color.white);
+        panel.add(this.amountField = new CustomizedComponent().customizeTextField(new SwingAmountEntry()));
+        return panel;
+    }
+
     private SwingCurrencyDialog createCurrencyDialog(List<Currency> currencies) {
-        this.currencyDialog = new SwingCurrencyDialog().define(currencies);;
+        this.currencyDialog = new SwingCurrencyDialog().define(currencies);
         return (SwingCurrencyDialog) this.currencyDialog;
     }
 
-    private JPanel createCurrencyToolbar(){
+    private JPanel createCurrencyToolbar() {
         JPanel toolbar = new JPanel();
         toolbar.setLayout(new FlowLayout(FlowLayout.LEFT));
         currencyButtons(toolbar);
@@ -52,23 +56,16 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
         JButton gbp = new CustomizedComponent().customizeButton(new JButton("GBP"));
         JButton usd = new CustomizedComponent().customizeButton(new JButton("USD"));
         JButton eur = new CustomizedComponent().customizeButton(new JButton("EUR"));
-        gbp.addActionListener(e -> {
-            System.out.println("LIBRA");
-        });
-        usd.addActionListener(e -> {
-            System.out.println("DÓLAR");
-        });
-        eur.addActionListener(e -> {
-            System.out.println("EURO");
-        });
+
+        gbp.addActionListener(e -> System.out.println("LIBRA"));
+        usd.addActionListener(e -> System.out.println("DÓLAR"));
+        eur.addActionListener(e -> System.out.println("EURO"));
+
         toolbar.add(gbp);
         toolbar.add(usd);
         toolbar.add(eur);
-//        ButtonGroup buttonGroup = new ButtonGroup();
-//        buttonGroup.add(eur);
-//        buttonGroup.add(usd);
-//        buttonGroup.add(gbp);
     }
+
 
     @Override
     public Money get() {
@@ -88,3 +85,5 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
     }
 
 }
+
+

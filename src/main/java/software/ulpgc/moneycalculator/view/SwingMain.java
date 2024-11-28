@@ -17,16 +17,14 @@ import java.util.Map;
 public class SwingMain extends JFrame {
     private final Map<String,Command> commands = new HashMap<>();
     private MoneyDisplay moneyDisplay;
-    private MoneyDialog moneyDialogLeft;
-    private MoneyDialog moneyDialogRight;
-    private CurrencyDialog currencyDialog;
+    private SwingMoneyDialog moneyDialogLeft;
+    private SwingMoneyDialog moneyDialogRight;
 
     public static void main(String[] args) {
         SwingMain main = new SwingMain();
         List<Currency> currencies = new FixerCurrencyLoader().load();
         Command command = new ExchangeMoneyCommand(
-                main.moneyDialogLeft.define(currencies),
-                main.moneyDialogRight.define(currencies),
+                main.getMoneyDialogLeft(),
                 new MockExchangeRateLoader(),
                 main.moneyDisplay());
         main.add("exchange money", command);
@@ -35,7 +33,7 @@ public class SwingMain extends JFrame {
 
     public SwingMain() throws HeadlessException {
         this.setTitle("Money calculator");
-        this.setSize(1000,600);
+        this.setSize(800,600);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -72,11 +70,16 @@ public class SwingMain extends JFrame {
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         centerPanel.setBorder(new LineBorder(Color.blue, 2)); // RECUERDA BORRAR
 
-        centerPanel.add((Component) (this.moneyDialogLeft = createMoneyDialog()));
-        centerPanel.add((Component) (this.moneyDialogRight = createMoneyDialog()));
-//        centerPanel.add(createMoneyDisplay());
+        this.moneyDialogLeft = (SwingMoneyDialog) createMoneyDialog().define(new FixerCurrencyLoader().load());
+        this.moneyDialogRight = (SwingMoneyDialog) createMoneyDialog().define(new FixerCurrencyLoader().load());
+
+
+        centerPanel.add(moneyDialogLeft);
+        centerPanel.add(moneyDialogRight);
+
         return centerPanel;
     }
+
 
     private SwingMoneyDialog createMoneyDialog() {
         //        dialog.getAmountField().addKeyListener(new KeyAdapter() {
@@ -87,12 +90,6 @@ public class SwingMain extends JFrame {
 //            }
 //        });
         return new SwingMoneyDialog();
-    }
-
-    private Component createCurrencyDialog() {
-        SwingCurrencyDialog dialog = new SwingCurrencyDialog();
-        this.currencyDialog = dialog;
-        return dialog;
     }
 
     private Component createMoneyDisplay() {
@@ -107,7 +104,7 @@ public class SwingMain extends JFrame {
         panel.setLayout(new FlowLayout());
 
         JButton button = new JButton("Calculate");
-        button.addActionListener(e -> commands.get("exchange money").execute());
+        button.addActionListener(e -> commands.get("Calculate").execute());
 
         panel.add(button);
         return panel;
@@ -119,10 +116,6 @@ public class SwingMain extends JFrame {
 
     private MoneyDisplay moneyDisplay() {
         return moneyDisplay;
-    }
-
-    private CurrencyDialog currencyDialog() {
-        return currencyDialog;
     }
 
     public MoneyDialog getMoneyDialogLeft() {

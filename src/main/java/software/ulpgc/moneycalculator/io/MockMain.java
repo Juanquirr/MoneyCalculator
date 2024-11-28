@@ -10,11 +10,10 @@ public class MockMain {
     public static void main(String[] args) {
         List<Currency> currencies = new MockCurrencyLoader().load();
         MoneyDialog moneyDialog = new MockMoneyDialog().define(currencies);
-        MoneyDialog moneyDialog1 = new MockMoneyDialog().define(currencies); // esta linea se cambia por currency
-        CurrencyDialog currencyDialog = new MockCurrencyDialog().define(currencies);
+        //CurrencyDialog currencyDialog = new MockCurrencyDialog().define(currencies);
         MoneyDisplay moneyDisplay = new MockMoneyDisplay();
         ExchangeRateLoader exchangeRateLoader = new MockExchangeRateLoader();
-        Command command = new ExchangeMoneyCommand(moneyDialog, moneyDialog1, exchangeRateLoader, moneyDisplay);
+        Command command = new ExchangeMoneyCommand(moneyDialog, exchangeRateLoader, moneyDisplay);
         command.execute();
     }
 }

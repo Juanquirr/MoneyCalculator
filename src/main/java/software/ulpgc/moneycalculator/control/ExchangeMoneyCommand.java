@@ -4,13 +4,12 @@ import software.ulpgc.moneycalculator.model.*;
 
 public class    ExchangeMoneyCommand implements Command {
     private final MoneyDialog fromMoneyDialog;
-    private final MoneyDialog toMoneyDialog;
+    //private final MoneyDialog toMoneyDialog;
     private final ExchangeRateLoader exchangeRateLoader;
     private final MoneyDisplay moneyDisplay;
 
-    public ExchangeMoneyCommand(MoneyDialog fromMoneyDialog, MoneyDialog toMoneyDialog, ExchangeRateLoader exchangeRateLoader, MoneyDisplay moneyDisplay) {
+    public ExchangeMoneyCommand(MoneyDialog fromMoneyDialog, ExchangeRateLoader exchangeRateLoader, MoneyDisplay moneyDisplay) {
         this.fromMoneyDialog = fromMoneyDialog;
-        this.toMoneyDialog = toMoneyDialog;
         this.exchangeRateLoader = exchangeRateLoader;
         this.moneyDisplay = moneyDisplay;
     }

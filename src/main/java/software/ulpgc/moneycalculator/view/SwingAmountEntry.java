@@ -2,16 +2,31 @@ package software.ulpgc.moneycalculator.view;
 
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
-import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class SwingAmountEntry extends JTextField {
+
+    private static final String PLACEHOLDER = "Enter amount";
+
     public SwingAmountEntry() {
-        setColumns(10);
-        setText("0.00");
-        setBackground(Color.lightGray);
-        setForeground(Color.white);
-        setBorder(null);
-        setMaximumSize(new Dimension(240, 20));
+        super(PLACEHOLDER);
         ((AbstractDocument) getDocument()).setDocumentFilter(new NumericFilter());
+
+        addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (getText().equals(PLACEHOLDER)) {
+                    setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (getText().trim().isEmpty()) {
+                    setText(PLACEHOLDER);
+                }
+            }
+        });
     }
 }
