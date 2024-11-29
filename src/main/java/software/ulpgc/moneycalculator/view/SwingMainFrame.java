@@ -1,5 +1,6 @@
 package software.ulpgc.moneycalculator.view;
 
+import software.ulpgc.moneycalculator.apps.windows.CustomCurrencyLoader;
 import software.ulpgc.moneycalculator.apps.windows.FixerCurrencyLoader;
 import software.ulpgc.moneycalculator.control.ExchangeMoneyCommand;
 import software.ulpgc.moneycalculator.apps.mock.MockExchangeRateLoader;
@@ -10,6 +11,7 @@ import software.ulpgc.moneycalculator.model.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +22,7 @@ public class SwingMainFrame extends JFrame {
     private SwingMoneyDialog moneyDialogLeft;
     private SwingMoneyDialog moneyDialogRight;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         SwingMainFrame main = new SwingMainFrame();
         List<Currency> currencies = new FixerCurrencyLoader().load();
         Command command = new ExchangeMoneyCommand(
@@ -31,7 +33,7 @@ public class SwingMainFrame extends JFrame {
         main.setVisible(true);
     }
 
-    public SwingMainFrame() throws HeadlessException {
+    public SwingMainFrame() throws HeadlessException, IOException {
         this.setTitle("Money calculator");
         this.setSize(1200,500);
         this.setLocationRelativeTo(null);
@@ -63,14 +65,14 @@ public class SwingMainFrame extends JFrame {
         return northPanel;
     }
 
-    private JPanel createCenterPanel() {
+    private JPanel createCenterPanel() throws IOException {
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         centerPanel.setBorder(new LineBorder(Color.blue, 2)); // RECUERDA BORRAR
         centerPanel.setOpaque(false);
 
-        this.moneyDialogLeft = (SwingMoneyDialog) createMoneyDialog().define(new FixerCurrencyLoader().load());
-        this.moneyDialogRight = (SwingMoneyDialog) createMoneyDialog().define(new FixerCurrencyLoader().load());
+        this.moneyDialogLeft = (SwingMoneyDialog) createMoneyDialog().define(new CustomCurrencyLoader().load());
+        this.moneyDialogRight = (SwingMoneyDialog) createMoneyDialog().define(new CustomCurrencyLoader().load());
 
 
         centerPanel.add(moneyDialogLeft);
