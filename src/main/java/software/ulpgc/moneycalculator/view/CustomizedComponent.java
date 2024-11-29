@@ -1,4 +1,4 @@
-package software.ulpgc.moneycalculator.apps.windows;
+package software.ulpgc.moneycalculator.view;
 
 import software.ulpgc.moneycalculator.model.Currency;
 
@@ -21,13 +21,15 @@ public class CustomizedComponent {
     public JTextField customizeTextField(JTextField textField) {
         textField.setHorizontalAlignment(JTextField.CENTER);
         textField.setBorder(null);
-        textField.setFont(getCustomFont().deriveFont(15f));
+        textField.setFont(getCustomFont().deriveFont(18f));
         return textField;
     }
     public JButton customizeButton(JButton button) {
         button.setFont(getCustomFont().deriveFont(12f));
         button.setForeground(Color.black);
         button.setBackground(new Color(102, 150, 200));
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
         button.setPreferredSize(new Dimension(100, 35));
         return button;
     }
@@ -35,7 +37,7 @@ public class CustomizedComponent {
     public JComboBox<Currency> customizeComboBox(JComboBox<Currency> selector) {
         selector.setBackground(new Color(102, 150, 200));
         selector.setBorder(new LineBorder(Color.orange, 3));
-        selector.setFont(getCustomFont().deriveFont(13f));
+        selector.setFont(getCustomFont().deriveFont(15f));
         selector.setMaximumRowCount(4);
         return selector;
     }

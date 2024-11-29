@@ -1,6 +1,5 @@
 package software.ulpgc.moneycalculator.view;
 
-import software.ulpgc.moneycalculator.apps.windows.CustomizedComponent;
 import software.ulpgc.moneycalculator.apps.windows.FixerCurrencyLoader;
 import software.ulpgc.moneycalculator.control.ExchangeMoneyCommand;
 import software.ulpgc.moneycalculator.apps.mock.MockExchangeRateLoader;
@@ -15,14 +14,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SwingMain extends JFrame {
+public class SwingMainFrame extends JFrame {
     private final Map<String,Command> commands = new HashMap<>();
     private MoneyDisplay moneyDisplay;
     private SwingMoneyDialog moneyDialogLeft;
     private SwingMoneyDialog moneyDialogRight;
 
     public static void main(String[] args) {
-        SwingMain main = new SwingMain();
+        SwingMainFrame main = new SwingMainFrame();
         List<Currency> currencies = new FixerCurrencyLoader().load();
         Command command = new ExchangeMoneyCommand(
                 main.getMoneyDialogLeft(),
@@ -32,9 +31,9 @@ public class SwingMain extends JFrame {
         main.setVisible(true);
     }
 
-    public SwingMain() throws HeadlessException {
+    public SwingMainFrame() throws HeadlessException {
         this.setTitle("Money calculator");
-        this.setSize(1000,500);
+        this.setSize(1200,500);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

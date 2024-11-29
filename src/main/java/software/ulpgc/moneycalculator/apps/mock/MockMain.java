@@ -1,5 +1,6 @@
 package software.ulpgc.moneycalculator.apps.mock;
 
+import com.google.gson.Gson;
 import software.ulpgc.moneycalculator.control.Command;
 import software.ulpgc.moneycalculator.control.ExchangeMoneyCommand;
 import software.ulpgc.moneycalculator.io.ExchangeRateLoader;

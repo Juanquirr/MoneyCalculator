@@ -1,6 +1,5 @@
 package software.ulpgc.moneycalculator.view;
 
-import software.ulpgc.moneycalculator.apps.windows.CustomizedComponent;
 import software.ulpgc.moneycalculator.model.Currency;
 import software.ulpgc.moneycalculator.io.CurrencyDialog;
 
