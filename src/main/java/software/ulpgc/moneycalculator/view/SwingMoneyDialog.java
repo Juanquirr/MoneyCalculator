@@ -17,16 +17,15 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
 
     public SwingMoneyDialog() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBorder(new LineBorder(Color.pink, 3));
         this.setBackground(new Color(90, 121, 200));
     }
 
     @Override
     public MoneyDialog define(List<Currency> currencies) {
         add(createCurrencyDialog(currencies));
-        add(Box.createVerticalStrut(50));
+        add(Box.createVerticalStrut(100));
         add(moneyDialogTextField());
-        add(Box.createVerticalStrut(50));
+        add(Box.createVerticalStrut(30));
         add(createCurrencyToolbar());
         return this;
     }

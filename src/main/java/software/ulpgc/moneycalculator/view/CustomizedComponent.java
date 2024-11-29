@@ -21,6 +21,7 @@ public class CustomizedComponent {
     public JTextField customizeTextField(JTextField textField) {
         textField.setHorizontalAlignment(JTextField.CENTER);
         textField.setBorder(null);
+        textField.setColumns(20);
         textField.setFont(getCustomFont().deriveFont(18f));
         return textField;
     }
@@ -34,11 +35,13 @@ public class CustomizedComponent {
         return button;
     }
 
-    public JComboBox<Currency> customizeComboBox(JComboBox<Currency> selector) {
+    public JComboBox<String> customizeComboBox(JComboBox<String> selector) {
         selector.setBackground(new Color(102, 150, 200));
         selector.setBorder(new LineBorder(Color.orange, 3));
+        selector.setPreferredSize(new Dimension(370, 35));
+        selector.setMaximumSize(new Dimension(370, 35));
         selector.setFont(getCustomFont().deriveFont(15f));
-        selector.setMaximumRowCount(4);
+        selector.setMaximumRowCount(5);
         return selector;
     }
     public JLabel createTitle() {

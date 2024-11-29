@@ -3,7 +3,7 @@ package software.ulpgc.moneycalculator.model;
 public record Currency(String code, String name) implements Comparable<Currency> {
     @Override
     public int compareTo(Currency o) {
-        return name.compareTo(o.name);
+        return code.compareTo(o.code);
     }
 
     @Override

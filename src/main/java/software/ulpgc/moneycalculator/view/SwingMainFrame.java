@@ -22,20 +22,9 @@ public class SwingMainFrame extends JFrame {
     private SwingMoneyDialog moneyDialogLeft;
     private SwingMoneyDialog moneyDialogRight;
 
-    public static void main(String[] args) throws IOException {
-        SwingMainFrame main = new SwingMainFrame();
-        List<Currency> currencies = new FixerCurrencyLoader().load();
-        Command command = new ExchangeMoneyCommand(
-                main.getMoneyDialogLeft(),
-                new MockExchangeRateLoader(),
-                main.moneyDisplay());
-        main.add("exchange money", command);
-        main.setVisible(true);
-    }
-
     public SwingMainFrame() throws HeadlessException, IOException {
         this.setTitle("Money calculator");
-        this.setSize(1200,500);
+        this.setSize(900,600);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -50,7 +39,6 @@ public class SwingMainFrame extends JFrame {
         JPanel northPanel = new JPanel();
         northPanel.setOpaque(false);
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
-        northPanel.setBorder(new LineBorder(Color.RED, 2)); // RECUERDA BORRAR
         northPanel.setPreferredSize(new Dimension(Integer.MAX_VALUE,150));
 
         JLabel title = new CustomizedComponent().createTitle();
@@ -68,7 +56,6 @@ public class SwingMainFrame extends JFrame {
     private JPanel createCenterPanel() throws IOException {
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        centerPanel.setBorder(new LineBorder(Color.blue, 2)); // RECUERDA BORRAR
         centerPanel.setOpaque(false);
 
         this.moneyDialogLeft = (SwingMoneyDialog) createMoneyDialog().define(new CustomCurrencyLoader().load());
@@ -107,15 +94,25 @@ public class SwingMainFrame extends JFrame {
         JButton button = new JButton("Calculate");
         button.addActionListener(e -> commands.get("Calculate").execute());
 
+
+
+        JButton formatSwitchButton = new JButton("Change Format");
+        formatSwitchButton.addActionListener(e -> {
+            ((SwingCurrencyDialog) moneyDialogLeft.getCurrencyDialog()).switchFormat();
+            ((SwingCurrencyDialog) moneyDialogRight.getCurrencyDialog()).switchFormat();
+        });
+
+
+        panel.add(formatSwitchButton);
         panel.add(button);
         return panel;
     }
 
-    private void add(String name, Command command) {
+    public void add(String name, Command command) {
         commands.put(name, command);
     }
 
-    private MoneyDisplay moneyDisplay() {
+    public MoneyDisplay moneyDisplay() {
         return moneyDisplay;
     }
 
