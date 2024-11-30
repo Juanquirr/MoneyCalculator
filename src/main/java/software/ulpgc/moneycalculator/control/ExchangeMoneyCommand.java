@@ -5,7 +5,7 @@ import software.ulpgc.moneycalculator.io.MoneyDialog;
 import software.ulpgc.moneycalculator.model.*;
 import software.ulpgc.moneycalculator.view.MoneyDisplay;
 
-public class    ExchangeMoneyCommand implements Command {
+public class ExchangeMoneyCommand implements Command {
     private final MoneyDialog fromMoneyDialog;
     //private final MoneyDialog toMoneyDialog;
     private final ExchangeRateLoader exchangeRateLoader;

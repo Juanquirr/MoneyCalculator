@@ -35,9 +35,7 @@ public class SwingCurrencyDialog extends JPanel implements CurrencyDialog {
 
     private void updateCurrencySelector() {
         currencySelector.removeAllItems();
-        for (Currency currency : currencies) {
-            currencySelector.addItem(formatCurrency(currency, currentFormat));
-        }
+        for (Currency currency : currencies) currencySelector.addItem(formatCurrency(currency, currentFormat));
     }
 
     public void switchFormat() {

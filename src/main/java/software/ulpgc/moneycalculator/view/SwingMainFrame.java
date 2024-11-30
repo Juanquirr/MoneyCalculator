@@ -91,8 +91,8 @@ public class SwingMainFrame extends JFrame {
         panel.setOpaque(false);
         panel.setLayout(new FlowLayout());
 
-        JButton button = new JButton("Calculate");
-        button.addActionListener(e -> commands.get("Calculate").execute());
+        JButton button = new JButton("Exchange rate");
+        button.addActionListener(e -> commands.get("exchange rate").execute());
 
 
 
@@ -102,6 +102,7 @@ public class SwingMainFrame extends JFrame {
             ((SwingCurrencyDialog) moneyDialogRight.getCurrencyDialog()).switchFormat();
         });
 
+        //commands.get("change format").execute();
 
         panel.add(formatSwitchButton);
         panel.add(button);
