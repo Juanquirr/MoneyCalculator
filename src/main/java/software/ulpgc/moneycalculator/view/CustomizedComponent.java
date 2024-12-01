@@ -25,17 +25,17 @@ public class CustomizedComponent {
         textField.setFont(getCustomFont().deriveFont(18f));
         return textField;
     }
-    public JButton customizeButton(JButton button) {
-        button.setFont(getCustomFont().deriveFont(12f));
+    public JButton customizeButton(JButton button, int width, int height) {
+        button.setFont(getCustomFont().deriveFont(14f));
         button.setForeground(Color.black);
+        button.setBorder(new LineBorder(Color.black, 3, true));
         button.setBackground(new Color(102, 150, 200));
         button.setFocusPainted(false);
-        button.setBorderPainted(false);
-        button.setPreferredSize(new Dimension(100, 35));
+        button.setPreferredSize(new Dimension(width, height));
         return button;
     }
 
-    public JComboBox<String> customizeComboBox(JComboBox<String> selector) {
+    public JComboBox<Currency> customizeComboBox(JComboBox<Currency> selector) {
         selector.setBackground(new Color(102, 150, 200));
         selector.setBorder(new LineBorder(Color.orange, 3));
         selector.setPreferredSize(new Dimension(370, 35));

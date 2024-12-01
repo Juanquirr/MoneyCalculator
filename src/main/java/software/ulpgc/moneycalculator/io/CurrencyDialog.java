@@ -2,9 +2,10 @@ package software.ulpgc.moneycalculator.io;
 
 import software.ulpgc.moneycalculator.model.Currency;
 
-import java.util.List;
+import java.util.Map;
 
 public interface CurrencyDialog {
-    CurrencyDialog define(List<Currency> currencies);
+    CurrencyDialog define(Map<String, Currency> currencies);
     Currency get();
+    CurrencyDialog set(Currency currency);
 }

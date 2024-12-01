@@ -5,27 +5,32 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import software.ulpgc.moneycalculator.io.CurrencyLoader;
 import software.ulpgc.moneycalculator.model.Currency;
+import software.ulpgc.moneycalculator.model.ExchangeRate;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static java.lang.Integer.parseInt;
 
 public class CustomCurrencyLoader implements CurrencyLoader {
     @Override
-    public List<Currency> load() throws IOException {
+    public Map<String, Currency> load() throws IOException {
         return loadCurrencies();
     }
 
-    public List<Currency> loadCurrencies() throws IOException {
+    public Map<String, Currency> loadCurrencies() throws IOException {
         String json = read();
         Map<String, JsonElement> coins = new Gson().fromJson(json, JsonObject.class).get("symbols").getAsJsonObject().asMap();
-        Map<String, String> map = new HashMap<>();
-        coins.forEach((symbol, jsonElement) -> {map.put(symbol,jsonElement.getAsString());});
-        return map.entrySet().stream().map(e -> new Currency(e.getKey(), e.getValue())).sorted().toList();
-
+        return coins.entrySet().stream().collect(Collectors
+                .toMap(Map.Entry::getKey,
+                        e-> new Currency(e.getKey(), e.getValue().getAsString())));
     }
+
     private static String read() throws IOException {
         try (InputStream is = CustomCurrencyLoader.class.getResourceAsStream("/symbols.json")) {
             if (is != null) return new String(is.readAllBytes());

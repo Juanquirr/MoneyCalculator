@@ -3,8 +3,8 @@ package software.ulpgc.moneycalculator.io;
 import software.ulpgc.moneycalculator.model.Currency;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 public interface CurrencyLoader {
-    List<Currency> load() throws IOException;
+    Map<String, Currency> load() throws IOException;
 }

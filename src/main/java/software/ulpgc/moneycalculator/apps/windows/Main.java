@@ -1,21 +1,32 @@
 package software.ulpgc.moneycalculator.apps.windows;
 
-import software.ulpgc.moneycalculator.apps.mock.MockExchangeRateLoader;
-import software.ulpgc.moneycalculator.control.ExchangeMoneyCommand;
-import software.ulpgc.moneycalculator.control.FormatCommand;
-import software.ulpgc.moneycalculator.view.SwingMainFrame;
+import software.ulpgc.moneycalculator.control.*;
+import software.ulpgc.moneycalculator.model.Currency;
+import software.ulpgc.moneycalculator.view.SwingCurrencyDialog;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        Map<String, Currency> currencies = new CustomCurrencyLoader().load();
         SwingMainFrame swingMainFrame = new SwingMainFrame();
-//        swingMainFrame.add("change format", new FormatCommand(
-//                swingMainFrame.getMoneyDialogLeft(), swingMainFrame.getMoneyDialogRight()));
-        swingMainFrame.add("exchange money", new ExchangeMoneyCommand(
+        swingMainFrame.defineCurrencies(new CustomCurrencyLoader().load())
+        .add("change format", new FormatCommand(
+                swingMainFrame.getMoneyDialogLeft().getCurrencyDialog(),
+                swingMainFrame.getMoneyDialogRight().getCurrencyDialog()))
+        .add("exchange rate", new ExchangeMoneyCommand(
                 swingMainFrame.getMoneyDialogLeft(),
-                new MockExchangeRateLoader(),
-                swingMainFrame.moneyDisplay()));
-        swingMainFrame.setVisible(true);
+                swingMainFrame.getMoneyDialogRight(),
+                new CustomExchangeRateLoader(currencies).load()))
+        .add("pound", new GBPSelectorCommand((SwingCurrencyDialog) swingMainFrame.getMoneyDialogLeft().getCurrencyDialog(),
+                        currencies))
+        .add("dollar", new USDSelectorCommand((SwingCurrencyDialog) swingMainFrame.getMoneyDialogLeft().getCurrencyDialog(),
+                        currencies))
+        .add("euro", new EURSelectorCommand((SwingCurrencyDialog) swingMainFrame.getMoneyDialogLeft().getCurrencyDialog(),
+                        currencies))
+        .add("clear", new ClearCommand(swingMainFrame.getMoneyDialogLeft(),
+                swingMainFrame.getMoneyDialogRight(), currencies))
+        .setVisible(true);
     }
 }

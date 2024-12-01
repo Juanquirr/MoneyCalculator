@@ -1,30 +1,27 @@
 package software.ulpgc.moneycalculator.control;
 
-import software.ulpgc.moneycalculator.io.ExchangeRateLoader;
 import software.ulpgc.moneycalculator.io.MoneyDialog;
 import software.ulpgc.moneycalculator.model.*;
-import software.ulpgc.moneycalculator.view.MoneyDisplay;
+
+import java.util.Map;
 
 public class ExchangeMoneyCommand implements Command {
     private final MoneyDialog fromMoneyDialog;
-    //private final MoneyDialog toMoneyDialog;
-    private final ExchangeRateLoader exchangeRateLoader;
-    private final MoneyDisplay moneyDisplay;
+    private final MoneyDialog toMoneyDialog;
+    private final Map<Currency, ExchangeRate> exchangeRateLoader;
 
-    public ExchangeMoneyCommand(MoneyDialog fromMoneyDialog, ExchangeRateLoader exchangeRateLoader, MoneyDisplay moneyDisplay) {
+    public ExchangeMoneyCommand(MoneyDialog fromMoneyDialog, MoneyDialog toMoneyDialog, Map<Currency, ExchangeRate> exchangeRateLoader) {
         this.fromMoneyDialog = fromMoneyDialog;
+        this.toMoneyDialog = toMoneyDialog;
         this.exchangeRateLoader = exchangeRateLoader;
-        this.moneyDisplay = moneyDisplay;
     }
 
     @Override
     public void execute() {
-        Money money = fromMoneyDialog.get();
-        Currency currency = fromMoneyDialog.get().currency();
-
-        ExchangeRate exchangeRate = exchangeRateLoader.load(money.currency(), currency);
-        Money result = new Money((long) (money.amount()*exchangeRate.rate()), currency);
-
-        moneyDisplay.show(result);
+        long amount = fromMoneyDialog.get().amount();
+        Currency currencyFrom = fromMoneyDialog.get().currency();
+        Currency currencyTo = toMoneyDialog.get().currency();
+        Money money = new Money((long) ((long) ((amount / exchangeRateLoader.get(currencyFrom).rate())) * exchangeRateLoader.get(currencyTo).rate()), currencyTo);
+        toMoneyDialog.set(money);
     }
 }
