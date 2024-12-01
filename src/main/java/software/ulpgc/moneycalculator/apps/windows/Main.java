@@ -18,15 +18,16 @@ public class Main {
         .add("exchange rate", new ExchangeMoneyCommand(
                 swingMainFrame.getMoneyDialogLeft(),
                 swingMainFrame.getMoneyDialogRight(),
-                new CustomExchangeRateLoader(currencies).load()))
-        .add("pound", new GBPSelectorCommand((SwingCurrencyDialog) swingMainFrame.getMoneyDialogLeft().getCurrencyDialog(),
+                new MockExchangeRateLoader(currencies).load()))
+                //                new CustomExchangeRateLoader(currencies).load()))
+                .add("pound", new GBPSelectorCommand((SwingCurrencyDialog) swingMainFrame.getMoneyDialogLeft().getCurrencyDialog(),
+                currencies))
+                .add("dollar", new USDSelectorCommand((SwingCurrencyDialog) swingMainFrame.getMoneyDialogLeft().getCurrencyDialog(),
                         currencies))
-        .add("dollar", new USDSelectorCommand((SwingCurrencyDialog) swingMainFrame.getMoneyDialogLeft().getCurrencyDialog(),
+                .add("euro", new EURSelectorCommand((SwingCurrencyDialog) swingMainFrame.getMoneyDialogLeft().getCurrencyDialog(),
                         currencies))
-        .add("euro", new EURSelectorCommand((SwingCurrencyDialog) swingMainFrame.getMoneyDialogLeft().getCurrencyDialog(),
-                        currencies))
-        .add("clear", new ClearCommand(swingMainFrame.getMoneyDialogLeft(),
-                swingMainFrame.getMoneyDialogRight(), currencies))
-        .setVisible(true);
+                .add("clear", new ClearCommand(swingMainFrame.getMoneyDialogLeft(),
+                        swingMainFrame.getMoneyDialogRight(), currencies))
+                .setVisible(true);
     }
 }

@@ -26,7 +26,7 @@ public class SwingMainFrame extends JFrame {
         this.getContentPane().setBackground(new Color(60,51,154));
         this.add(createNorthPanel(), BorderLayout.NORTH);
         this.add(createCenterPanel(this.swingMoneyDialogLeft = createMoneyDialog(),
-                this.swingMoneyDialogRight = new SwingMoneyDialog()), BorderLayout.CENTER);
+                this.swingMoneyDialogRight = createMoneyDialog()), BorderLayout.CENTER);
         this.add(toolbar(), BorderLayout.SOUTH);
     }
 
