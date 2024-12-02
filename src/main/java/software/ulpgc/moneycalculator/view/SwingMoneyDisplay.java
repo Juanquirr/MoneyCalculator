@@ -7,6 +7,7 @@ import software.ulpgc.moneycalculator.model.Money;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.Locale;
 import java.util.Map;
 
 public class SwingMoneyDisplay extends JPanel implements MoneyDisplay {
@@ -52,11 +53,6 @@ public class SwingMoneyDisplay extends JPanel implements MoneyDisplay {
         repaint();
     }
 
-    @Override
-    public void show(Money money) {
-        amountField.setText(String.valueOf(money.amount()));
-    }
-
     public MoneyDisplay define(Map<String, Currency> currencies) {
         this.currencyDialog.define(currencies);
         return this;
@@ -66,17 +62,19 @@ public class SwingMoneyDisplay extends JPanel implements MoneyDisplay {
         return this.currencyDialog;
     }
 
+    private double toDouble(String text) {
+        return text.isEmpty() ? 0 : Double.parseDouble(text);
+    }
+
     @Override
     public Money get() {
-        return new Money(toLong(amountField.getText()), currencyDialog.get());
-    }
-    private long toLong(String text) {
-        return text.isEmpty() ? 0 : Long.parseLong(text);
+        return new Money(toDouble(amountField.getText()), currencyDialog.get());
     }
 
     @Override
     public MoneyDisplay set(Money money) {
-        amountField.setText(String.valueOf(money.amount()));
+        amountField.setText(String.format(Locale.US, "%.2f", money.amount()));
         return this;
     }
 }
+

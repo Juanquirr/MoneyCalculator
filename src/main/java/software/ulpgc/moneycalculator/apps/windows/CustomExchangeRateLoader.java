@@ -39,7 +39,7 @@ public class CustomExchangeRateLoader implements ExchangeRateLoader {
                 .toMap(e -> currencies.get(e.getKey()),
                         e -> new ExchangeRate(base,
                                 currencies.get(e.getKey()), LocalDate.of(parseInt(split[0]), parseInt(split[1]), parseInt(split[2])),
-                                e.getValue().getAsDouble())
+                                e.getValue().getAsFloat())
                 ));
     }
 

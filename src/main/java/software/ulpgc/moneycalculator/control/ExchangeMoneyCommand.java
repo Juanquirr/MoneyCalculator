@@ -20,10 +20,17 @@ public class ExchangeMoneyCommand implements Command {
 
     @Override
     public void execute() {
-        long amount = fromMoneyDialog.get().amount();
+        double amount = fromMoneyDialog.get().amount();
         Currency currencyFrom = fromMoneyDialog.get().currency();
         Currency currencyTo = toMoneyDialog.get().currency();
-        Money money = new Money((long) ((long) ((amount / exchangeRateLoader.get(currencyFrom).rate())) * exchangeRateLoader.get(currencyTo).rate()), currencyTo);
+
+        double rateFrom = exchangeRateLoader.get(currencyFrom).rate();
+        double rateTo = exchangeRateLoader.get(currencyTo).rate();
+
+        double convertedAmount = (amount / rateFrom) * rateTo;
+
+        Money money = new Money(convertedAmount, currencyTo);
         toMoneyDialog.set(money);
     }
+
 }

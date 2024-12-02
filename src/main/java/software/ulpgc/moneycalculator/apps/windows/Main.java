@@ -6,34 +6,50 @@ import software.ulpgc.moneycalculator.model.Currency;
 import software.ulpgc.moneycalculator.view.SwingCurrencyDialog;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+    private static Map<String, Currency> currencies;
+    private static SwingMainFrame frame;
+
     public static void main(String[] args) throws IOException {
-        Map<String, Currency> currencies = new CustomCurrencyLoader().load();
-        SwingMainFrame swingMainFrame = new SwingMainFrame();
-        swingMainFrame.defineCurrencies(new CustomCurrencyLoader().load()).add("change format", new FormatCommand(
-                getCurrencyDialogFromMoneyDialog(swingMainFrame),
-                getCurrencyDialogFromMoneyDisplay(swingMainFrame)))
-                .add("clear", new ClearCommand(swingMainFrame.getMoneyDialog(), swingMainFrame.getMoneyDisplay(), currencies))
-                .add("exchange rate", new ExchangeMoneyCommand(swingMainFrame.getMoneyDialog(), swingMainFrame.getMoneyDisplay(),
-                new MockExchangeRateLoader(currencies).load()))
-                .add("pound dialog", new GBPDialogCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDialog(swingMainFrame), currencies))
-                .add("dollar dialog", new USDDialogCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDialog(swingMainFrame), currencies))
-                .add("euro dialog", new EURDialogCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDialog(swingMainFrame), currencies))
-                .add("pound display", new GBPDisplayCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDisplay(swingMainFrame), currencies))
-                .add("dollar display", new USDDisplayCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDisplay(swingMainFrame), currencies))
-                .add("euro display", new EURDisplayCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDisplay(swingMainFrame), currencies));
-        swingMainFrame.setVisible(true);//
-
-        // new CustomExchangeRateLoader(currencies).load())) PRO MODE
+        createMainFrame().defineCurrencies(loadCurrencies())
+                .add(generateCommands())
+                .setVisible(true);
+//                new MockExchangeRateLoader(currencies).load()))
     }
 
-    private static CurrencyDialog getCurrencyDialogFromMoneyDisplay(SwingMainFrame swingMainFrame) {
-        return swingMainFrame.getMoneyDisplay().getCurrencyDialog();
+    private static SwingMainFrame createMainFrame() throws IOException {
+        return frame = new SwingMainFrame();
     }
 
-    private static CurrencyDialog getCurrencyDialogFromMoneyDialog(SwingMainFrame swingMainFrame) {
-        return swingMainFrame.getMoneyDialog().getCurrencyDialog();
+    private static Map<String, Currency> loadCurrencies() throws IOException {
+        return currencies = new CustomCurrencyLoader().load();
+    }
+
+    private static Map<String, Command> generateCommands() throws IOException {
+        Map<String, Command> commands = new HashMap<>();
+        commands.put("change format", new FormatCommand(
+                        getCurrencyDialogFromMoneyDialog(),
+                        getCurrencyDialogFromMoneyDisplay()));
+        commands.put("clear", new ClearCommand(frame.getMoneyDialog(), frame.getMoneyDisplay(), currencies));
+        commands.put("exchange rate", new ExchangeMoneyCommand(frame.getMoneyDialog(), frame.getMoneyDisplay(),
+                        new CustomExchangeRateLoader(currencies).load()));
+        commands.put("pound dialog", new GBPDialogCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDialog(), currencies));
+        commands.put("dollar dialog", new USDDialogCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDialog(), currencies));
+        commands.put("euro dialog", new EURDialogCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDialog(), currencies));
+        commands.put("pound display", new GBPDisplayCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDisplay(), currencies));
+        commands.put("dollar display", new USDDisplayCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDisplay(), currencies));
+        commands.put("euro display", new EURDisplayCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDisplay(), currencies));
+        return commands;
+    }
+
+    private static CurrencyDialog getCurrencyDialogFromMoneyDisplay() {
+        return frame.getMoneyDisplay().getCurrencyDialog();
+    }
+
+    private static CurrencyDialog getCurrencyDialogFromMoneyDialog() {
+        return frame.getMoneyDialog().getCurrencyDialog();
     }
 }

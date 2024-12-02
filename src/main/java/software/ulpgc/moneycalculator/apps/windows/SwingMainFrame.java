@@ -108,8 +108,10 @@ public class SwingMainFrame extends JFrame {
         return panel;
     }
 
-    public SwingMainFrame add(String name, Command command) {
-        commands.put(name, command);
+    public SwingMainFrame add(Map<String, Command> commands) {
+        for (String name : commands.keySet()) {
+            this.commands.put(name, commands.get(name));
+        }
         return this;
     }
 
