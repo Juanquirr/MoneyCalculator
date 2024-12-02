@@ -22,6 +22,7 @@ public class CustomizedComponent {
         textField.setHorizontalAlignment(JTextField.CENTER);
         textField.setBorder(null);
         textField.setColumns(20);
+        textField.setOpaque(false);
         textField.setFont(getCustomFont().deriveFont(18f));
         return textField;
     }
@@ -62,5 +63,14 @@ public class CustomizedComponent {
 
     public Font getCustomFont() {
         return customFont;
+    }
+
+    public JPanel customizePanel(JPanel panel) {
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        panel.setBorder(new LineBorder(Color.blue, 3));
+        panel.setBackground(new Color(90, 121, 200));
+        panel.setPreferredSize(new Dimension(280, 40));
+        panel.setBackground(Color.white);
+        return panel;
     }
 }

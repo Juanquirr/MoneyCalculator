@@ -5,11 +5,11 @@ import software.ulpgc.moneycalculator.view.SwingCurrencyDialog;
 
 import java.util.Map;
 
-public class GBPSelectorCommand implements Command {
+public class GBPDisplayCommand implements Command {
     private final SwingCurrencyDialog swingCurrencyDialog;
     private final Map<String, Currency> currencies;
 
-    public GBPSelectorCommand(SwingCurrencyDialog swingCurrencyDialog, Map<String, Currency> currencies) {
+    public GBPDisplayCommand(SwingCurrencyDialog swingCurrencyDialog, Map<String, Currency> currencies) {
         this.swingCurrencyDialog = swingCurrencyDialog;
         this.currencies = currencies;
     }

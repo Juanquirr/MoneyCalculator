@@ -1,8 +1,7 @@
 package software.ulpgc.moneycalculator.view;
 
-import software.ulpgc.moneycalculator.io.MoneyDialog;
-import software.ulpgc.moneycalculator.model.Currency;
 import software.ulpgc.moneycalculator.io.CurrencyDialog;
+import software.ulpgc.moneycalculator.model.Currency;
 import software.ulpgc.moneycalculator.model.Money;
 
 import javax.swing.*;
@@ -10,31 +9,27 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Map;
 
-public class SwingMoneyDialog extends JPanel implements MoneyDialog {
+public class SwingMoneyDisplay extends JPanel implements MoneyDisplay {
+
     private JTextField amountField;
     private final SwingCurrencyDialog currencyDialog;
     private JPanel currencyToolbar;
 
-    public SwingMoneyDialog() {
+    public SwingMoneyDisplay() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(new Color(90, 121, 200));
         this.setBorder(new LineBorder(Color.black, 4, true));
         add(this.currencyDialog = createCurrencyDialog());
         add(Box.createVerticalStrut(75));
-        add(moneyDialogTextField());
+        add(resultTextField());
         add(Box.createVerticalStrut(75));
         add(createCurrencyToolbar());
     }
 
-    @Override
-    public MoneyDialog define(Map<String, Currency> currencies) {
-        this.currencyDialog.define(currencies);
-        return this;
-    }
-
-    private JPanel moneyDialogTextField() {
+    private JPanel resultTextField() {
         JPanel panel = new CustomizedComponent().customizePanel(new JPanel());
-        panel.add(this.amountField = new CustomizedComponent().customizeTextField(new SwingAmountEntry()));
+        panel.add(this.amountField = new CustomizedComponent().customizeTextField(new JTextField()));
+        this.amountField.setEditable(false);
         return panel;
     }
 
@@ -58,24 +53,30 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
     }
 
     @Override
-    public Money get() {
-        return new Money(toLong(amountField.getText()), currencyDialog.get());
+    public void show(Money money) {
+        amountField.setText(String.valueOf(money.amount()));
     }
 
-    @Override
-    public MoneyDialog set(Money money) {
-        amountField.setText(String.valueOf(money.amount()));
+    public MoneyDisplay define(Map<String, Currency> currencies) {
+        this.currencyDialog.define(currencies);
         return this;
     }
 
-    private long toLong(String text) {
-        return text.equals("Enter amount") ? 0 : Long.parseLong(text);
+    public CurrencyDialog getCurrencyDialog() {
+        return this.currencyDialog;
     }
 
-    public CurrencyDialog getCurrencyDialog() {
-        return currencyDialog;
+    @Override
+    public Money get() {
+        return new Money(toLong(amountField.getText()), currencyDialog.get());
+    }
+    private long toLong(String text) {
+        return text.isEmpty() ? 0 : Long.parseLong(text);
+    }
+
+    @Override
+    public MoneyDisplay set(Money money) {
+        amountField.setText(String.valueOf(money.amount()));
+        return this;
     }
 }
-
-
-

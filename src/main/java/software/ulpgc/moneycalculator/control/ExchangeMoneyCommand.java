@@ -2,15 +2,17 @@ package software.ulpgc.moneycalculator.control;
 
 import software.ulpgc.moneycalculator.io.MoneyDialog;
 import software.ulpgc.moneycalculator.model.*;
+import software.ulpgc.moneycalculator.view.MoneyDisplay;
+import software.ulpgc.moneycalculator.view.SwingMoneyDisplay;
 
 import java.util.Map;
 
 public class ExchangeMoneyCommand implements Command {
     private final MoneyDialog fromMoneyDialog;
-    private final MoneyDialog toMoneyDialog;
+    private final MoneyDisplay toMoneyDialog;
     private final Map<Currency, ExchangeRate> exchangeRateLoader;
 
-    public ExchangeMoneyCommand(MoneyDialog fromMoneyDialog, MoneyDialog toMoneyDialog, Map<Currency, ExchangeRate> exchangeRateLoader) {
+    public ExchangeMoneyCommand(MoneyDialog fromMoneyDialog, SwingMoneyDisplay toMoneyDialog, Map<Currency, ExchangeRate> exchangeRateLoader) {
         this.fromMoneyDialog = fromMoneyDialog;
         this.toMoneyDialog = toMoneyDialog;
         this.exchangeRateLoader = exchangeRateLoader;

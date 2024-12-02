@@ -4,6 +4,7 @@ import software.ulpgc.moneycalculator.control.Command;
 import software.ulpgc.moneycalculator.model.Currency;
 import software.ulpgc.moneycalculator.view.CustomizedComponent;
 import software.ulpgc.moneycalculator.view.SwingMoneyDialog;
+import software.ulpgc.moneycalculator.view.SwingMoneyDisplay;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,8 +14,8 @@ import java.util.Map;
 
 public class SwingMainFrame extends JFrame {
     private final Map<String,Command> commands = new HashMap<>();
-    private final SwingMoneyDialog swingMoneyDialogLeft;
-    private final SwingMoneyDialog swingMoneyDialogRight;
+    private final SwingMoneyDialog moneyDialog;
+    private final SwingMoneyDisplay moneyDisplay;
 
     public SwingMainFrame() throws HeadlessException, IOException {
         this.setTitle("Money calculator");
@@ -25,8 +26,8 @@ public class SwingMainFrame extends JFrame {
         this.setLayout(new BorderLayout());
         this.getContentPane().setBackground(new Color(60,51,154));
         this.add(createNorthPanel(), BorderLayout.NORTH);
-        this.add(createCenterPanel(this.swingMoneyDialogLeft = createMoneyDialog(),
-                this.swingMoneyDialogRight = createMoneyDialog()), BorderLayout.CENTER);
+        this.add(createCenterPanel(this.moneyDialog = createMoneyDialog(),
+                this.moneyDisplay = createMoneyDisplay()), BorderLayout.CENTER);
         this.add(toolbar(), BorderLayout.SOUTH);
     }
 
@@ -48,7 +49,7 @@ public class SwingMainFrame extends JFrame {
         return northPanel;
     }
 
-    private JPanel createCenterPanel(SwingMoneyDialog swingMoneyDialogLeft, SwingMoneyDialog swingMoneyDialogRight) throws IOException {
+    private JPanel createCenterPanel(SwingMoneyDialog swingMoneyDialogLeft, SwingMoneyDisplay swingMoneyDialogRight) throws IOException {
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         centerPanel.setOpaque(false);
@@ -64,15 +65,28 @@ public class SwingMainFrame extends JFrame {
         JButton usd = new CustomizedComponent().customizeButton(new JButton("USD"), 100, 35);
         JButton eur = new CustomizedComponent().customizeButton(new JButton("EUR"), 100, 35);
 
-        gbp.addActionListener(e -> commands.get("pound").execute());
-        usd.addActionListener(e -> commands.get("dollar").execute());
-        eur.addActionListener(e -> commands.get("euro").execute());
+        gbp.addActionListener(e -> commands.get("pound dialog").execute());
+        usd.addActionListener(e -> commands.get("dollar dialog").execute());
+        eur.addActionListener(e -> commands.get("euro dialog").execute());
 
         SwingMoneyDialog dialog = new SwingMoneyDialog();
         dialog.addButtonsToToolbar(gbp, usd, eur);
         return dialog;
     }
 
+    private SwingMoneyDisplay createMoneyDisplay() {
+        JButton gbp = new CustomizedComponent().customizeButton(new JButton("GBP"), 100, 35);
+        JButton usd = new CustomizedComponent().customizeButton(new JButton("USD"), 100, 35);
+        JButton eur = new CustomizedComponent().customizeButton(new JButton("EUR"), 100, 35);
+
+        gbp.addActionListener(e -> commands.get("pound display").execute());
+        usd.addActionListener(e -> commands.get("dollar display").execute());
+        eur.addActionListener(e -> commands.get("euro display").execute());
+
+        SwingMoneyDisplay display = new SwingMoneyDisplay();
+        display.addButtonsToToolbar(gbp, usd, eur);
+        return display;
+    }
 
     private Component toolbar() {
         JPanel panel = new JPanel();
@@ -99,17 +113,17 @@ public class SwingMainFrame extends JFrame {
         return this;
     }
 
-    public SwingMoneyDialog getMoneyDialogLeft() {
-        return swingMoneyDialogLeft;
+    public SwingMoneyDialog getMoneyDialog() {
+        return moneyDialog;
     }
 
-    public SwingMoneyDialog getMoneyDialogRight() {
-        return swingMoneyDialogRight;
+    public SwingMoneyDisplay getMoneyDisplay() {
+        return moneyDisplay;
     }
 
     public SwingMainFrame defineCurrencies(Map<String, Currency> load) {
-        swingMoneyDialogLeft.define(load);
-        swingMoneyDialogRight.define(load);
+        moneyDialog.define(load);
+        moneyDisplay.define(load);
         return this;
     }
 }
