@@ -1,4 +1,4 @@
-package software.ulpgc.moneycalculator.apps.windows;
+package software.ulpgc.moneycalculator.apps.mocks;
 
 import software.ulpgc.moneycalculator.io.ExchangeRateLoader;
 import software.ulpgc.moneycalculator.model.Currency;

@@ -5,17 +5,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import software.ulpgc.moneycalculator.io.CurrencyLoader;
 import software.ulpgc.moneycalculator.model.Currency;
-import software.ulpgc.moneycalculator.model.ExchangeRate;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static java.lang.Integer.parseInt;
 
 public class CustomCurrencyLoader implements CurrencyLoader {
     @Override

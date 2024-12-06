@@ -9,5 +9,4 @@ public interface MoneyDialog {
     MoneyDialog define(Map<String, Currency> currencies);
     Money get();
     MoneyDialog set(Money money);
-    void remove();
 }

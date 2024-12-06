@@ -8,7 +8,6 @@ import software.ulpgc.moneycalculator.view.SwingMoneyDisplay;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,14 +16,8 @@ public class SwingMainFrame extends JFrame {
     private final SwingMoneyDialog moneyDialog;
     private final SwingMoneyDisplay moneyDisplay;
 
-    public SwingMainFrame() throws HeadlessException, IOException {
-        this.setTitle("Money calculator");
-        this.setSize(900,600);
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    public SwingMainFrame() throws HeadlessException {
         this.setLayout(new BorderLayout());
-        this.getContentPane().setBackground(new Color(60,51,154));
         this.add(createNorthPanel(), BorderLayout.NORTH);
         this.add(createCenterPanel(this.moneyDialog = createMoneyDialog(),
                 this.moneyDisplay = createMoneyDisplay()), BorderLayout.CENTER);
@@ -33,74 +26,73 @@ public class SwingMainFrame extends JFrame {
 
     private Component createNorthPanel() {
         JPanel northPanel = new JPanel();
-        northPanel.setOpaque(false);
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setPreferredSize(new Dimension(Integer.MAX_VALUE,150));
-
-        JLabel title = new CustomizedComponent().createTitle();
-        JLabel name = new CustomizedComponent().createAuthorName();
+        northPanel.setOpaque(false);
 
         northPanel.add(Box.createVerticalGlue());
-        northPanel.add(title);
+        northPanel.add(new CustomizedComponent().createTitle());
         northPanel.add(Box.createVerticalGlue());
-        northPanel.add(name);
+        northPanel.add(new CustomizedComponent().createAuthorName());
         northPanel.add(Box.createVerticalGlue());
 
         return northPanel;
     }
 
-    private JPanel createCenterPanel(SwingMoneyDialog swingMoneyDialogLeft, SwingMoneyDisplay swingMoneyDialogRight) throws IOException {
+    private JPanel createCenterPanel(SwingMoneyDialog moneyDialog, SwingMoneyDisplay moneyDisplay) {
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         centerPanel.setOpaque(false);
 
-        centerPanel.add(swingMoneyDialogLeft);
-        centerPanel.add(swingMoneyDialogRight);
+        centerPanel.add(moneyDialog);
+        centerPanel.add(moneyDisplay);
 
         return centerPanel;
     }
 
     private SwingMoneyDialog createMoneyDialog() {
-        JButton gbp = new CustomizedComponent().customizeButton(new JButton("GBP"), 100, 35);
-        JButton usd = new CustomizedComponent().customizeButton(new JButton("USD"), 100, 35);
-        JButton eur = new CustomizedComponent().customizeButton(new JButton("EUR"), 100, 35);
+        FrequentButton frequentButton = createButtonsForFrequentUsedCurrency();
 
-        gbp.addActionListener(e -> commands.get("pound dialog").execute());
-        usd.addActionListener(e -> commands.get("dollar dialog").execute());
-        eur.addActionListener(e -> commands.get("euro dialog").execute());
+        frequentButton.gbp.addActionListener(_ -> commands.get("pound dialog").execute());
+        frequentButton.usd.addActionListener(_ -> commands.get("dollar dialog").execute());
+        frequentButton.eur.addActionListener(_ -> commands.get("euro dialog").execute());
 
-        SwingMoneyDialog dialog = new SwingMoneyDialog();
-        dialog.addButtonsToToolbar(gbp, usd, eur);
-        return dialog;
+        return new SwingMoneyDialog().addButtonsToToolbar(frequentButton.gbp(), frequentButton.usd(), frequentButton.eur());
     }
 
     private SwingMoneyDisplay createMoneyDisplay() {
+        FrequentButton frequentButton = createButtonsForFrequentUsedCurrency();
+
+        frequentButton.gbp().addActionListener(_ -> commands.get("pound display").execute());
+        frequentButton.usd().addActionListener(_ -> commands.get("dollar display").execute());
+        frequentButton.eur().addActionListener(_ -> commands.get("euro display").execute());
+
+        return new SwingMoneyDisplay().addButtonsToToolbar(frequentButton.gbp(), frequentButton.usd(), frequentButton.eur());
+    }
+
+    private static FrequentButton createButtonsForFrequentUsedCurrency() {
         JButton gbp = new CustomizedComponent().customizeButton(new JButton("GBP"), 100, 35);
         JButton usd = new CustomizedComponent().customizeButton(new JButton("USD"), 100, 35);
         JButton eur = new CustomizedComponent().customizeButton(new JButton("EUR"), 100, 35);
+        return new FrequentButton(gbp, usd, eur);
+    }
 
-        gbp.addActionListener(e -> commands.get("pound display").execute());
-        usd.addActionListener(e -> commands.get("dollar display").execute());
-        eur.addActionListener(e -> commands.get("euro display").execute());
-
-        SwingMoneyDisplay display = new SwingMoneyDisplay();
-        display.addButtonsToToolbar(gbp, usd, eur);
-        return display;
+    private record FrequentButton(JButton gbp, JButton usd, JButton eur) {
     }
 
     private Component toolbar() {
         JPanel panel = new JPanel();
-        panel.setOpaque(false);
         panel.setLayout(new FlowLayout());
+        panel.setOpaque(false);
 
         JButton formatSwitchButton = new CustomizedComponent().customizeButton(new JButton("Change Format"), 300, 50);
-        formatSwitchButton.addActionListener(e -> commands.get("change format").execute());
+        formatSwitchButton.addActionListener(_ -> commands.get("change format").execute());
 
         JButton exchangeRateButton = new CustomizedComponent().customizeButton(new JButton("Calculate"), 300, 50);
-        exchangeRateButton.addActionListener(e -> commands.get("exchange rate").execute());
+        exchangeRateButton.addActionListener(_ -> commands.get("exchange rate").execute());
 
         JButton clearField = new CustomizedComponent().customizeButton(new JButton("Clear"), 250, 50);
-        clearField.addActionListener(e -> commands.get("clear").execute());
+        clearField.addActionListener(_ -> commands.get("clear").execute());
 
         panel.add(formatSwitchButton);
         panel.add(exchangeRateButton);
@@ -109,9 +101,7 @@ public class SwingMainFrame extends JFrame {
     }
 
     public SwingMainFrame add(Map<String, Command> commands) {
-        for (String name : commands.keySet()) {
-            this.commands.put(name, commands.get(name));
-        }
+        for (String name : commands.keySet()) this.commands.put(name, commands.get(name));
         return this;
     }
 
@@ -126,6 +116,16 @@ public class SwingMainFrame extends JFrame {
     public SwingMainFrame defineCurrencies(Map<String, Currency> load) {
         moneyDialog.define(load);
         moneyDisplay.define(load);
+        return this;
+    }
+
+    public SwingMainFrame initializeFrame() {
+        this.setTitle("Money calculator");
+        this.setSize(900,600);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.getContentPane().setBackground(new Color(60,51,154));
         return this;
     }
 }

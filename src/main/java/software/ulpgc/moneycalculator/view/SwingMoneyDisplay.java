@@ -45,12 +45,13 @@ public class SwingMoneyDisplay extends JPanel implements MoneyDisplay {
         return currencyToolbar;
     }
 
-    public void addButtonsToToolbar(JButton... buttons) {
+    public SwingMoneyDisplay addButtonsToToolbar(JButton... buttons) {
         for (JButton button : buttons) {
             currencyToolbar.add(button);
         }
         revalidate();
         repaint();
+        return this;
     }
 
     public MoneyDisplay define(Map<String, Currency> currencies) {

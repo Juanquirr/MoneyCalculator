@@ -1,5 +1,6 @@
 package software.ulpgc.moneycalculator.apps.windows;
 
+import software.ulpgc.moneycalculator.apps.mocks.MockExchangeRateLoader;
 import software.ulpgc.moneycalculator.control.*;
 import software.ulpgc.moneycalculator.io.CurrencyDialog;
 import software.ulpgc.moneycalculator.model.Currency;
@@ -17,11 +18,10 @@ public class Main {
         createMainFrame().defineCurrencies(loadCurrencies())
                 .add(generateCommands())
                 .setVisible(true);
-//                new MockExchangeRateLoader(currencies).load()))
     }
 
     private static SwingMainFrame createMainFrame() throws IOException {
-        return frame = new SwingMainFrame();
+        return frame = new SwingMainFrame().initializeFrame();
     }
 
     private static Map<String, Currency> loadCurrencies() throws IOException {
@@ -35,7 +35,8 @@ public class Main {
                         getCurrencyDialogFromMoneyDisplay()));
         commands.put("clear", new ClearCommand(frame.getMoneyDialog(), frame.getMoneyDisplay(), currencies));
         commands.put("exchange rate", new ExchangeMoneyCommand(frame.getMoneyDialog(), frame.getMoneyDisplay(),
-                        new CustomExchangeRateLoader(currencies).load()));
+                new MockExchangeRateLoader(currencies).load()));
+//                        new CustomExchangeRateLoader(currencies).load()));
         commands.put("pound dialog", new GBPDialogCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDialog(), currencies));
         commands.put("dollar dialog", new USDDialogCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDialog(), currencies));
         commands.put("euro dialog", new EURDialogCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDialog(), currencies));

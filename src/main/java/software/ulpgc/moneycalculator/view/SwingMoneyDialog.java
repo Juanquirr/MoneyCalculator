@@ -49,12 +49,13 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
         return currencyToolbar;
     }
 
-    public void addButtonsToToolbar(JButton... buttons) {
+    public SwingMoneyDialog addButtonsToToolbar(JButton... buttons) {
         for (JButton button : buttons) {
             currencyToolbar.add(button);
         }
         revalidate();
         repaint();
+        return this;
     }
 
     @Override
@@ -69,10 +70,6 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
         return this;
     }
 
-    @Override
-    public void remove() {
-        amountField.removeAll();
-    }
 
     private double toDouble(String text) {
         return text.equals("Enter amount") ? 0 : Double.parseDouble(text);

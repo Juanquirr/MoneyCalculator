@@ -21,7 +21,6 @@ public class ClearCommand implements Command {
 
     @Override
     public void execute() {
-        moneyDialog.remove();
         moneyDialog.set(new Money(0, currencies.get("EUR")));
         moneyDisplay.set(new Money(0, currencies.get("EUR")));
     }
