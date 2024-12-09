@@ -9,18 +9,18 @@ public class FormatCommand implements Command {
     private int i = 0;
 
     public FormatCommand(CurrencyDialog swingCurrencyDialogLeft, CurrencyDialog swingCurrencyDialogRight) {
-        if (swingCurrencyDialogLeft == null || swingCurrencyDialogRight == null) {
-            throw new IllegalArgumentException("Los diálogos de moneda no pueden ser nulos.");
-        }
+        if (swingCurrencyDialogLeft == null || swingCurrencyDialogRight == null)
+            throw new IllegalArgumentException("Currency dialogs can't be null.");
         this.swingCurrencyDialogLeft = swingCurrencyDialogLeft;
         this.swingCurrencyDialogRight = swingCurrencyDialogRight;
     }
 
     @Override
     public void execute() {
+        ((SwingCurrencyDialog) swingCurrencyDialogLeft).changeCurrencyFormat(i == 0 ?
+                CurrencyRenderer.Format.CODE : CurrencyRenderer.Format.NAME);
+        ((SwingCurrencyDialog) swingCurrencyDialogRight).changeCurrencyFormat(i == 0 ?
+                CurrencyRenderer.Format.CODE : CurrencyRenderer.Format.NAME);
         i = ++i % 2;
-        ((SwingCurrencyDialog) swingCurrencyDialogLeft).changeCurrencyFormat(i != 0 ? CurrencyRenderer.Format.NAME : CurrencyRenderer.Format.CODE);
-        ((SwingCurrencyDialog) swingCurrencyDialogRight).changeCurrencyFormat(i != 0 ? CurrencyRenderer.Format.NAME : CurrencyRenderer.Format.CODE);
-
     }
 }

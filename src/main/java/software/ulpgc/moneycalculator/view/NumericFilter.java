@@ -31,11 +31,15 @@ public class NumericFilter extends DocumentFilter {
 
     private boolean isValidInput(String currentText, String newText) {
         if (newText.equals(placeholder)) return true;
-        if ((currentText.contains(".") && newText.equals(".")) || (currentText.isEmpty() && newText.equals("."))) return false;
+        if ((currentText.contains(".") && newText.equals(".")) ||
+                (currentText.isEmpty() && newText.equals(".")) ||
+                (currentText.matches(".*\\.\\d{4}") && newText.matches("\\d")))
+            return false;
         return isNumeric(newText);
     }
 
+
     private boolean isNumeric(String text) {
-        return text.matches("(\\d|\\.|\\d+\\.\\d+|)");
+        return text.matches("(\\d|\\.|\\d+\\.\\d|)");
     }
 }

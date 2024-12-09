@@ -19,16 +19,12 @@ public class SwingAmountEntry extends JTextField {
         addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (getText().equals(PLACEHOLDER)) {
-                    setText("");
-                }
+                if (getText().equals(PLACEHOLDER)) setText("");
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (getText().trim().isEmpty()) {
-                    setText(PLACEHOLDER);
-                }
+                if (getText().trim().isEmpty()) setText(PLACEHOLDER);
             }
         });
     }

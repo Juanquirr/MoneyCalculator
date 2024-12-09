@@ -1,4 +1,4 @@
-package software.ulpgc.moneycalculator.view;
+package software.ulpgc.moneycalculator.apps.windows;
 
 import software.ulpgc.moneycalculator.model.Currency;
 
@@ -18,6 +18,10 @@ public class CustomizedComponent {
             throw new RuntimeException("Failed to load font", e);
         }
     }
+    public Font getCustomFont() {
+        return customFont;
+    }
+
     public JTextField customizeTextField(JTextField textField) {
         textField.setHorizontalAlignment(JTextField.CENTER);
         textField.setBorder(null);
@@ -26,6 +30,7 @@ public class CustomizedComponent {
         textField.setFont(getCustomFont().deriveFont(18f));
         return textField;
     }
+
     public JButton customizeButton(JButton button, int width, int height) {
         button.setFont(getCustomFont().deriveFont(14f));
         button.setForeground(Color.black);
@@ -35,7 +40,6 @@ public class CustomizedComponent {
         button.setPreferredSize(new Dimension(width, height));
         return button;
     }
-
     public JComboBox<Currency> customizeComboBox(JComboBox<Currency> selector) {
         selector.setBackground(new Color(102, 150, 200));
         selector.setBorder(new LineBorder(Color.orange, 3));
@@ -45,6 +49,7 @@ public class CustomizedComponent {
         selector.setMaximumRowCount(5);
         return selector;
     }
+
     public JLabel createTitle() {
         JLabel title = new JLabel("MONEY CALCULATOR");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -59,10 +64,6 @@ public class CustomizedComponent {
         name.setFont(getCustomFont().deriveFont(14f));
         name.setForeground(new Color(70, 120, 201));
         return name;
-    }
-
-    public Font getCustomFont() {
-        return customFont;
     }
 
     public JPanel customizePanel(JPanel panel) {

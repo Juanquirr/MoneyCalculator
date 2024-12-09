@@ -1,5 +1,6 @@
 package software.ulpgc.moneycalculator.view;
 
+import software.ulpgc.moneycalculator.apps.windows.CustomizedComponent;
 import software.ulpgc.moneycalculator.io.CurrencyDialog;
 import software.ulpgc.moneycalculator.model.Currency;
 import software.ulpgc.moneycalculator.model.Money;
@@ -74,7 +75,7 @@ public class SwingMoneyDisplay extends JPanel implements MoneyDisplay {
 
     @Override
     public MoneyDisplay set(Money money) {
-        amountField.setText(String.format(Locale.US, "%.2f", money.amount()));
+        amountField.setText(String.format(Locale.US, "%.4f", money.amount()));
         return this;
     }
 }

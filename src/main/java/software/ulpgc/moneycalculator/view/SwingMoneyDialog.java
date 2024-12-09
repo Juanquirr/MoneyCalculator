@@ -1,5 +1,6 @@
 package software.ulpgc.moneycalculator.view;
 
+import software.ulpgc.moneycalculator.apps.windows.CustomizedComponent;
 import software.ulpgc.moneycalculator.io.MoneyDialog;
 import software.ulpgc.moneycalculator.model.Currency;
 import software.ulpgc.moneycalculator.io.CurrencyDialog;
@@ -43,15 +44,15 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
     }
 
     private JPanel createCurrencyToolbar() {
-        currencyToolbar = new JPanel();
-        currencyToolbar.setLayout(new FlowLayout(FlowLayout.CENTER));
-        currencyToolbar.setOpaque(false);
-        return currencyToolbar;
+        this.currencyToolbar = new JPanel();
+        this.currencyToolbar.setLayout(new FlowLayout(FlowLayout.CENTER));
+        this.currencyToolbar.setOpaque(false);
+        return this.currencyToolbar;
     }
 
     public SwingMoneyDialog addButtonsToToolbar(JButton... buttons) {
         for (JButton button : buttons) {
-            currencyToolbar.add(button);
+            this.currencyToolbar.add(button);
         }
         revalidate();
         repaint();
@@ -65,11 +66,9 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
 
     @Override
     public MoneyDialog set(Money money) {
-        System.out.println(money.toString());
         amountField.setText(String.valueOf(money.amount()));
         return this;
     }
-
 
     private double toDouble(String text) {
         return text.equals("Enter amount") ? 0 : Double.parseDouble(text);

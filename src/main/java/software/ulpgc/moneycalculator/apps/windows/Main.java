@@ -1,10 +1,8 @@
 package software.ulpgc.moneycalculator.apps.windows;
 
-import software.ulpgc.moneycalculator.apps.mocks.MockExchangeRateLoader;
 import software.ulpgc.moneycalculator.control.*;
 import software.ulpgc.moneycalculator.io.CurrencyDialog;
 import software.ulpgc.moneycalculator.model.Currency;
-import software.ulpgc.moneycalculator.view.SwingCurrencyDialog;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,7 +18,7 @@ public class Main {
                 .setVisible(true);
     }
 
-    private static SwingMainFrame createMainFrame() throws IOException {
+    private static SwingMainFrame createMainFrame() {
         return frame = new SwingMainFrame().initializeFrame();
     }
 
@@ -35,14 +33,14 @@ public class Main {
                         getCurrencyDialogFromMoneyDisplay()));
         commands.put("clear", new ClearCommand(frame.getMoneyDialog(), frame.getMoneyDisplay(), currencies));
         commands.put("exchange rate", new ExchangeMoneyCommand(frame.getMoneyDialog(), frame.getMoneyDisplay(),
-                new MockExchangeRateLoader(currencies).load()));
-//                        new CustomExchangeRateLoader(currencies).load()));
-        commands.put("pound dialog", new GBPDialogCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDialog(), currencies));
-        commands.put("dollar dialog", new USDDialogCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDialog(), currencies));
-        commands.put("euro dialog", new EURDialogCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDialog(), currencies));
-        commands.put("pound display", new GBPDisplayCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDisplay(), currencies));
-        commands.put("dollar display", new USDDisplayCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDisplay(), currencies));
-        commands.put("euro display", new EURDisplayCommand((SwingCurrencyDialog) getCurrencyDialogFromMoneyDisplay(), currencies));
+//                new MockExchangeRateLoader(currencies).load()));
+                        new CustomExchangeRateLoader(currencies).load()));
+        commands.put("pound dialog", new GBPDialogCommand(getCurrencyDialogFromMoneyDialog(), currencies));
+        commands.put("dollar dialog", new USDDialogCommand(getCurrencyDialogFromMoneyDialog(), currencies));
+        commands.put("euro dialog", new EURDialogCommand(getCurrencyDialogFromMoneyDialog(), currencies));
+        commands.put("pound display", new GBPDisplayCommand(getCurrencyDialogFromMoneyDisplay(), currencies));
+        commands.put("dollar display", new USDDisplayCommand(getCurrencyDialogFromMoneyDisplay(), currencies));
+        commands.put("euro display", new EURDisplayCommand(getCurrencyDialogFromMoneyDisplay(), currencies));
         return commands;
     }
 

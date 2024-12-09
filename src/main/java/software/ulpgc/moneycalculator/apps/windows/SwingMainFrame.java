@@ -2,7 +2,6 @@ package software.ulpgc.moneycalculator.apps.windows;
 
 import software.ulpgc.moneycalculator.control.Command;
 import software.ulpgc.moneycalculator.model.Currency;
-import software.ulpgc.moneycalculator.view.CustomizedComponent;
 import software.ulpgc.moneycalculator.view.SwingMoneyDialog;
 import software.ulpgc.moneycalculator.view.SwingMoneyDisplay;
 
