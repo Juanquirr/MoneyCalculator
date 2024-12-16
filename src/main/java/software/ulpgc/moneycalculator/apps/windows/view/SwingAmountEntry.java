@@ -1,4 +1,4 @@
-package software.ulpgc.moneycalculator.view;
+package software.ulpgc.moneycalculator.apps.windows.view;
 
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;

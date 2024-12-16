@@ -1,8 +1,8 @@
-package software.ulpgc.moneycalculator.view;
+package software.ulpgc.moneycalculator.apps.windows.view;
 
-import software.ulpgc.moneycalculator.apps.windows.CustomizedComponent;
+import software.ulpgc.moneycalculator.apps.windows.customization.CustomizedComponent;
 import software.ulpgc.moneycalculator.model.Currency;
-import software.ulpgc.moneycalculator.io.CurrencyDialog;
+import software.ulpgc.moneycalculator.view.CurrencyDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,11 +35,11 @@ public class SwingCurrencyDialog extends JPanel implements CurrencyDialog {
     private void updateCurrencySelector() {
         currencySelector.removeAllItems();
         currencies.values().forEach(currency -> currencySelector.addItem(currency));
-        changeCurrencyFormat(CurrencyRenderer.Format.NAME);
+        changeCurrencyFormat(SwingCurrencyRenderer.Format.NAME);
     }
 
-    public void changeCurrencyFormat(CurrencyRenderer.Format format) {
-        currencySelector.setRenderer(new CurrencyRenderer(format));
+    public void changeCurrencyFormat(SwingCurrencyRenderer.Format format) {
+        currencySelector.setRenderer(new SwingCurrencyRenderer(format));
         repaint();
     }
 

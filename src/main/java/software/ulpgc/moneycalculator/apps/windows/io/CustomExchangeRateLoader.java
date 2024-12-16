@@ -1,8 +1,9 @@
-package software.ulpgc.moneycalculator.apps.windows;
+package software.ulpgc.moneycalculator.apps.windows.io;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import software.ulpgc.moneycalculator.apps.windows.API;
 import software.ulpgc.moneycalculator.io.ExchangeRateLoader;
 import software.ulpgc.moneycalculator.model.ExchangeRate;
 import software.ulpgc.moneycalculator.model.Currency;

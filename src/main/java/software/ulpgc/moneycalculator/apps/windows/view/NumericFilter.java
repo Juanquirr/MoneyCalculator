@@ -1,4 +1,4 @@
-package software.ulpgc.moneycalculator.view;
+package software.ulpgc.moneycalculator.apps.windows.view;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;

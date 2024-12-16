@@ -1,15 +1,15 @@
-package software.ulpgc.moneycalculator.view;
+package software.ulpgc.moneycalculator.apps.windows.view;
 
 import software.ulpgc.moneycalculator.model.Currency;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class CurrencyRenderer extends JLabel implements ListCellRenderer<Currency> {
+public class SwingCurrencyRenderer extends JLabel implements ListCellRenderer<Currency> {
 
     private final Format format;
 
-    public CurrencyRenderer(Format format) {
+    public SwingCurrencyRenderer(Format format) {
         this.format = format;
         this.setOpaque(true);
     }

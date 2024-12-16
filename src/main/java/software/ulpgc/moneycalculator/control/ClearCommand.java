@@ -1,6 +1,6 @@
 package software.ulpgc.moneycalculator.control;
 
-import software.ulpgc.moneycalculator.io.MoneyDialog;
+import software.ulpgc.moneycalculator.view.MoneyDialog;
 import software.ulpgc.moneycalculator.model.Currency;
 import software.ulpgc.moneycalculator.model.Money;
 import software.ulpgc.moneycalculator.view.MoneyDisplay;

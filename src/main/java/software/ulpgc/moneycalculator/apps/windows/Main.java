@@ -1,7 +1,10 @@
 package software.ulpgc.moneycalculator.apps.windows;
 
+import software.ulpgc.moneycalculator.apps.windows.io.CustomCurrencyLoader;
+import software.ulpgc.moneycalculator.apps.windows.io.CustomExchangeRateLoader;
+import software.ulpgc.moneycalculator.apps.windows.view.SwingMainFrame;
 import software.ulpgc.moneycalculator.control.*;
-import software.ulpgc.moneycalculator.io.CurrencyDialog;
+import software.ulpgc.moneycalculator.view.CurrencyDialog;
 import software.ulpgc.moneycalculator.model.Currency;
 
 import java.io.IOException;

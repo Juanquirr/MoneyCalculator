@@ -1,7 +1,8 @@
 package software.ulpgc.moneycalculator.control;
 
-import software.ulpgc.moneycalculator.io.CurrencyDialog;
-import software.ulpgc.moneycalculator.view.*;
+import software.ulpgc.moneycalculator.apps.windows.view.SwingCurrencyRenderer;
+import software.ulpgc.moneycalculator.apps.windows.view.SwingCurrencyDialog;
+import software.ulpgc.moneycalculator.view.CurrencyDialog;
 
 public class FormatCommand implements Command {
     private final CurrencyDialog swingCurrencyDialogLeft;
@@ -18,9 +19,9 @@ public class FormatCommand implements Command {
     @Override
     public void execute() {
         ((SwingCurrencyDialog) swingCurrencyDialogLeft).changeCurrencyFormat(i == 0 ?
-                CurrencyRenderer.Format.CODE : CurrencyRenderer.Format.NAME);
+                SwingCurrencyRenderer.Format.CODE : SwingCurrencyRenderer.Format.NAME);
         ((SwingCurrencyDialog) swingCurrencyDialogRight).changeCurrencyFormat(i == 0 ?
-                CurrencyRenderer.Format.CODE : CurrencyRenderer.Format.NAME);
+                SwingCurrencyRenderer.Format.CODE : SwingCurrencyRenderer.Format.NAME);
         i = ++i % 2;
     }
 }

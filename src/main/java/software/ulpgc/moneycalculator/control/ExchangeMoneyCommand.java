@@ -1,9 +1,9 @@
 package software.ulpgc.moneycalculator.control;
 
-import software.ulpgc.moneycalculator.io.MoneyDialog;
+import software.ulpgc.moneycalculator.view.MoneyDialog;
 import software.ulpgc.moneycalculator.model.*;
 import software.ulpgc.moneycalculator.view.MoneyDisplay;
-import software.ulpgc.moneycalculator.view.SwingMoneyDisplay;
+import software.ulpgc.moneycalculator.apps.windows.view.SwingMoneyDisplay;
 
 import java.util.Map;
 
