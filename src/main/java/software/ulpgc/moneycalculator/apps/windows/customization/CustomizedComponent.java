@@ -1,6 +1,6 @@
 package software.ulpgc.moneycalculator.apps.windows.customization;
 
-import software.ulpgc.moneycalculator.model.Currency;
+import software.ulpgc.moneycalculator.architecture.model.Currency;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -13,7 +13,7 @@ public class CustomizedComponent {
 
     public CustomizedComponent() {
         try {
-            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("LuckiestGuy-Regular.ttf")).deriveFont(12f);
+            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src\\main\\resources\\LuckiestGuy-Regular.ttf")).deriveFont(12f);
         } catch (Exception e) {
             throw new RuntimeException("Failed to load font", e);
         }

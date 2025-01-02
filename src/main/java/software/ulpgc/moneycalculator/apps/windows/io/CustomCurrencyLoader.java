@@ -3,8 +3,8 @@ package software.ulpgc.moneycalculator.apps.windows.io;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import software.ulpgc.moneycalculator.io.CurrencyLoader;
-import software.ulpgc.moneycalculator.model.Currency;
+import software.ulpgc.moneycalculator.architecture.io.CurrencyLoader;
+import software.ulpgc.moneycalculator.architecture.model.Currency;
 
 import java.io.IOException;
 import java.io.InputStream;

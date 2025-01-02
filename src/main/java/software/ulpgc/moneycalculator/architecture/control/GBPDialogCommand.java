@@ -1,7 +1,7 @@
-package software.ulpgc.moneycalculator.control;
+package software.ulpgc.moneycalculator.architecture.control;
 
-import software.ulpgc.moneycalculator.view.CurrencyDialog;
-import software.ulpgc.moneycalculator.model.Currency;
+import software.ulpgc.moneycalculator.architecture.view.CurrencyDialog;
+import software.ulpgc.moneycalculator.architecture.model.Currency;
 
 import java.util.Map;
 

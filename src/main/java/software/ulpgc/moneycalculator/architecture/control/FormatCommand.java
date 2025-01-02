@@ -1,8 +1,8 @@
-package software.ulpgc.moneycalculator.control;
+package software.ulpgc.moneycalculator.architecture.control;
 
 import software.ulpgc.moneycalculator.apps.windows.view.SwingCurrencyRenderer;
 import software.ulpgc.moneycalculator.apps.windows.view.SwingCurrencyDialog;
-import software.ulpgc.moneycalculator.view.CurrencyDialog;
+import software.ulpgc.moneycalculator.architecture.view.CurrencyDialog;
 
 public class FormatCommand implements Command {
     private final CurrencyDialog swingCurrencyDialogLeft;

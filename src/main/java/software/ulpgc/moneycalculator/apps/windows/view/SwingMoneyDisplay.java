@@ -1,10 +1,10 @@
 package software.ulpgc.moneycalculator.apps.windows.view;
 
 import software.ulpgc.moneycalculator.apps.windows.customization.CustomizedComponent;
-import software.ulpgc.moneycalculator.model.Currency;
-import software.ulpgc.moneycalculator.model.Money;
-import software.ulpgc.moneycalculator.view.CurrencyDialog;
-import software.ulpgc.moneycalculator.view.MoneyDisplay;
+import software.ulpgc.moneycalculator.architecture.model.Currency;
+import software.ulpgc.moneycalculator.architecture.model.Money;
+import software.ulpgc.moneycalculator.architecture.view.CurrencyDialog;
+import software.ulpgc.moneycalculator.architecture.view.MoneyDisplay;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
